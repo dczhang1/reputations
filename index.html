@@ -6,12 +6,13 @@
     <title>Reputations | The Personality Card Game</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/styles.css">
+    <meta name="description" content="Reputations - The personality card game that tests how well you know each other">
 </head>
 <body>
     <div class="container">
         <h1>Reputations</h1>
         
-        <!-- Start Menu (New) -->
+        <!-- Start Menu -->
         <div id="start-menu" class="game-section">
             <h2>Welcome to Reputations</h2>
             <p class="tagline">The personality card game that tests how well you know each other</p>
@@ -46,7 +47,7 @@
                 <div id="scores">Team: <span id="team-score">0</span> | Game: <span id="game-score">0</span></div>
             </div>
             
-            <!-- Round Indicator (Simplified) -->
+            <!-- Round Indicator -->
             <div class="round-indicator">
                 <div class="round-text">
                     Round <span id="current-round">1</span> of <span id="total-rounds">5</span>
@@ -84,7 +85,7 @@
     </div>
 
     <!-- Hamburger Menu Button -->
-    <div id="hamburger-btn" class="hamburger-btn">
+    <div id="hamburger-btn" class="hamburger-btn" aria-label="Menu">
         <div class="hamburger-line"></div>
         <div class="hamburger-line"></div>
         <div class="hamburger-line"></div>
@@ -94,7 +95,7 @@
     <div id="floating-menu" class="floating-menu">
         <div class="menu-header">
             <h3>Game Menu</h3>
-            <button id="close-menu-btn" class="close-btn">&times;</button>
+            <button id="close-menu-btn" class="close-btn" aria-label="Close menu">&times;</button>
         </div>
         <div class="menu-options">
             <button id="new-game-btn" class="menu-btn">New Game</button>
@@ -103,11 +104,11 @@
         </div>
     </div>
 
-    <!-- Dark Error Modal -->
-    <div id="error-modal" class="modal dark-modal">
+    <!-- Error Modal -->
+    <div id="error-modal" class="modal dark-modal" role="dialog" aria-labelledby="error-header" aria-modal="true">
         <div class="modal-content">
             <div class="modal-header">
-                <h3>This page says</h3>
+                <h3 id="error-header">This page says</h3>
             </div>
             <div class="modal-body">
                 <p id="error-message"></p>
@@ -119,11 +120,11 @@
     </div>
 
     <!-- Rules Modal -->
-    <div id="rules-modal" class="modal">
+    <div id="rules-modal" class="modal" role="dialog" aria-labelledby="rules-header" aria-modal="true">
         <div class="modal-content">
             <div class="modal-header">
-                <h3>Reputations Game Rules</h3>
-                <button id="close-rules-btn" class="close-btn">&times;</button>
+                <h3 id="rules-header">Reputations Game Rules</h3>
+                <button id="close-rules-btn" class="close-btn" aria-label="Close rules">&times;</button>
             </div>
             <div class="modal-body">
                 <h4>Game Objective</h4>
@@ -146,11 +147,11 @@
     </div>
 
     <!-- Options Modal -->
-    <div id="options-modal" class="modal">
+    <div id="options-modal" class="modal" role="dialog" aria-labelledby="options-header" aria-modal="true">
         <div class="modal-content">
             <div class="modal-header">
-                <h3>Game Options</h3>
-                <button id="close-options-btn" class="close-btn">&times;</button>
+                <h3 id="options-header">Game Options</h3>
+                <button id="close-options-btn" class="close-btn" aria-label="Close options">&times;</button>
             </div>
             <div class="modal-body">
                 <div class="option-group">
@@ -172,6 +173,7 @@
     <!-- Overlay for modals -->
     <div id="overlay" class="overlay"></div>
 
+    <!-- Scripts -->
     <script src="js/data.js"></script>
     <script src="js/game.js"></script>
 </body>

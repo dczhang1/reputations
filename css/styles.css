@@ -1,4 +1,48 @@
-/* Basic styling */
+/* 
+ * Reputations Game - Main Stylesheet
+ * Contains all styling for the game, organized by component.
+ */
+
+/* ===== BASE STYLES ===== */
+:root {
+  /* Color variables */
+  --primary-color: #7b68ee;
+  --primary-hover: #6a5acd;
+  --primary-active: #5a4db7;
+  --secondary-color: #ff8787;
+  --secondary-hover: #ff6b6b;
+  --text-color: #2a2a2a;
+  --text-light: #666;
+  --heading-color: var(--primary-color);
+  --bg-color: #f5f6fa;
+  --card-bg: white;
+  --success-color: #4caf50;
+  --warning-color: #ff9800;
+  --error-color: #e57373;
+  
+  /* Spacing variables */
+  --space-xs: 5px;
+  --space-sm: 10px;
+  --space-md: 15px;
+  --space-lg: 20px;
+  --space-xl: 30px;
+  
+  /* Typography */
+  --font-family: 'Poppins', sans-serif;
+  --font-size-base: 1rem;
+  --font-size-sm: 0.875rem;
+  --font-size-lg: 1.1rem;
+  --font-size-xl: 1.3rem;
+  --font-size-xxl: 1.8rem;
+  --font-size-xxxl: 2.5rem;
+  
+  /* Border radius */
+  --border-radius-sm: 4px;
+  --border-radius-md: 8px;
+  --border-radius-lg: 10px;
+  --border-radius-round: 50%;
+}
+
 * { 
     box-sizing: border-box; 
     margin: 0; 
@@ -6,137 +50,117 @@
 }
 
 body { 
-    font-family: 'Poppins', sans-serif; 
-    background: #f5f6fa; 
+    font-family: var(--font-family); 
+    background: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.6;
 }
 
 .container { 
     max-width: 1000px; 
     margin: 0 auto; 
-    padding: 20px; 
+    padding: var(--space-lg); 
 }
 
 button { 
-    cursor: pointer; 
+    cursor: pointer;
+    font-family: var(--font-family);
 }
 
-/* Game sections */
+/* ===== TYPOGRAPHY ===== */
+h1, h2, h3, h4 { 
+    color: var(--heading-color);
+    margin-bottom: var(--space-md);
+    font-weight: 600;
+}
+
+h1 {
+    font-size: var(--font-size-xxxl);
+    text-align: center;
+}
+
+h2 {
+    font-size: var(--font-size-xxl);
+}
+
+h3 {
+    font-size: var(--font-size-xl);
+}
+
+h4 {
+    font-size: var(--font-size-lg);
+    margin-top: var(--space-md);
+}
+
+p, li {
+    margin-bottom: var(--space-sm);
+}
+
+/* ===== GAME SECTIONS ===== */
 .game-section { 
     display: none; 
-    padding: 20px; 
-    background: white; 
-    border-radius: 10px; 
-    margin: 20px 0; 
+    padding: var(--space-lg); 
+    background: var(--card-bg); 
+    border-radius: var(--border-radius-lg); 
+    margin: var(--space-lg) 0; 
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 #start-menu { 
     display: block; 
     text-align: center; 
-    padding: 40px 20px;
+    padding: var(--space-xl) var(--space-lg);
 }
 
-/* Start Menu Styling */
+/* ===== START MENU ===== */
 .tagline {
-    color: #666;
-    margin-bottom: 30px;
-    font-size: 1.1rem;
+    color: var(--text-light);
+    margin-bottom: var(--space-xl);
+    font-size: var(--font-size-lg);
 }
 
 .start-menu-buttons {
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: var(--space-md);
     max-width: 300px;
     margin: 0 auto;
 }
 
-/* Game Mode Menu Styling - New vertical layout */
+/* ===== MAIN MENU ===== */
 #main-menu {
     text-align: center;
-    padding: 40px 20px;
+    padding: var(--space-xl) var(--space-lg);
 }
 
 #main-menu h2 {
-    font-size: 2.2rem;
-    margin-bottom: 30px;
+    font-size: var(--font-size-xxl);
+    margin-bottom: var(--space-xl);
 }
 
 #main-menu button {
     display: block;
-    margin: 15px auto;
+    margin: var(--space-md) auto;
     width: 100%;
     max-width: 300px;
-    font-size: 1.1rem;
-    padding: 15px 30px;
+    font-size: var(--font-size-lg);
+    padding: var(--space-md) var(--space-xl);
 }
 
-
-.btn-large {
-    padding: 15px 30px;
-    font-size: 1.1rem;
-}
-
-.btn-secondary {
-    background: #ff8787;
-}
-
-.btn-secondary:hover {
-    background: #ff6b6b;
-}
-
-/* Cards */
-.trait-card {
-    width: 150px;
-    height: 220px;
-    background: white;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    padding: 10px;
-    margin: 10px;
-    display: inline-block;
-    position: relative;
-    cursor: pointer;
-    vertical-align: top;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s, box-shadow 0.2s;
-}
-
-.trait-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-}
-
-.card-rank {
-    position: absolute;
-    top: -10px;
-    right: -10px;
-    width: 30px;
-    height: 30px;
-    background: #7b68ee;
-    color: white;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: bold;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-}
-
-/* Controls */
+/* ===== BUTTONS ===== */
 .btn {
-    background: #7b68ee;
+    background: var(--primary-color);
     color: white;
     border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    margin: 10px;
+    padding: var(--space-sm) var(--space-lg);
+    border-radius: var(--border-radius-sm);
+    margin: var(--space-sm);
     font-weight: 600;
     transition: background 0.3s, transform 0.2s;
 }
 
 .btn:hover {
-    background: #6a5acd;
+    background: var(--primary-hover);
     transform: translateY(-2px);
 }
 
@@ -150,46 +174,106 @@ button {
     transform: none;
 }
 
+.btn-large {
+    padding: var(--space-md) var(--space-xl);
+    font-size: var(--font-size-lg);
+}
+
+.btn-secondary {
+    background: var(--secondary-color);
+}
+
+.btn-secondary:hover {
+    background: var(--secondary-hover);
+}
+
+/* ===== TRAIT CARDS ===== */
+.trait-card {
+    width: 150px;
+    height: 220px;
+    background: var(--card-bg);
+    border: 1px solid #ddd;
+    border-radius: var(--border-radius-md);
+    padding: var(--space-sm);
+    margin: var(--space-sm);
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+    vertical-align: top;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.trait-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.trait-card h3 {
+    margin-top: 0;
+    font-size: var(--font-size-lg);
+}
+
+.trait-card p {
+    font-size: var(--font-size-sm);
+}
+
+.card-rank {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    width: 30px;
+    height: 30px;
+    background: var(--primary-color);
+    color: white;
+    border-radius: var(--border-radius-round);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
 .cards-container {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    margin: 20px 0;
+    margin: var(--space-lg) 0;
 }
 
-/* Player setup */
+/* ===== PLAYER SETUP ===== */
 .player-input {
-    margin: 10px 0;
+    margin: var(--space-sm) 0;
     display: flex;
     align-items: center;
+    animation: fadeIn 0.3s;
 }
 
 .player-input input {
     flex: 1;
-    padding: 8px;
+    padding: var(--space-sm);
     border: 1px solid #ddd;
-    border-radius: 4px;
-    font-family: 'Poppins', sans-serif;
+    border-radius: var(--border-radius-sm);
+    font-family: var(--font-family);
 }
 
-/* Remove player button styling */
 .remove-player-btn {
-    background: #ff8787;
+    background: var(--secondary-color);
     color: white;
     border: none;
-    border-radius: 50%;
+    border-radius: var(--border-radius-round);
     width: 28px;
     height: 28px;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-left: 10px;
+    margin-left: var(--space-sm);
     font-size: 18px;
     transition: background 0.3s, transform 0.2s;
 }
 
 .remove-player-btn:hover {
-    background: #ff6b6b;
+    background: var(--secondary-hover);
     transform: scale(1.1);
 }
 
@@ -197,65 +281,16 @@ button {
     transform: scale(1);
 }
 
-/* Game info */
+/* ===== GAME INFO ===== */
 .game-info {
-    margin: 20px 0;
+    margin: var(--space-lg) 0;
     text-align: center;
 }
 
-h1, h2 { 
-    color: #7b68ee; 
-    margin-bottom: 15px; 
-}
-
-h1 {
-    font-size: 2.5rem;
-    text-align: center;
-}
-
-h2 {
-    font-size: 1.8rem;
-}
-
-h3 {
-    font-size: 1.3rem;
-    color: #4a6fa5;
-}
-
-/* Ranking scale */
-.ranking-scale {
-    display: flex;
-    justify-content: space-between;
-    margin: 10px 0;
-    font-weight: 500;
-    color: #7b68ee;
-}
-
-/* Score feedback */
-.score-feedback {
-    background: #f0f8ff;
-    border: 1px solid #b0d8ff;
-    border-radius: 8px;
-    padding: 15px;
-    margin: 15px 0;
-    text-align: center;
-    display: none;
-}
-
-.round-indicator-results {
-    display: inline-block;
-    padding: 5px 15px;
-    background-color: #7b68ee;
-    color: white;
-    border-radius: 20px;
-    font-weight: 600;
-    margin: 10px auto;
-}
-
-/* Simplified Round Indicator */
+/* ===== ROUND INDICATOR ===== */
 .round-indicator {
     text-align: center;
-    margin: 15px 0;
+    margin: var(--space-md) 0;
     padding: 5px 10px;
     background-color: #f0f0f0;
     border-radius: 20px;
@@ -268,52 +303,48 @@ h3 {
 .round-text {
     font-size: 16px;
     font-weight: 600;
-    color: #7b68ee;
+    color: var(--primary-color);
 }
 
-/* Animations */
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
+.round-indicator-results {
+    display: inline-block;
+    padding: 5px 15px;
+    background-color: var(--primary-color);
+    color: white;
+    border-radius: 20px;
+    font-weight: 600;
+    margin: var(--space-sm) auto;
 }
 
-@keyframes slideIn {
-    from { transform: translateY(20px); opacity: 0; }
-    to { transform: translateY(0); opacity: 1; }
+/* ===== RANKING SCALE ===== */
+.ranking-scale {
+    display: flex;
+    justify-content: space-between;
+    margin: var(--space-sm) 0;
+    font-weight: 500;
+    color: var(--primary-color);
 }
 
-.trait-card {
-    animation: fadeIn 0.3s;
+/* ===== SCORE FEEDBACK ===== */
+.score-feedback {
+    background: #f0f8ff;
+    border: 1px solid #b0d8ff;
+    border-radius: var(--border-radius-md);
+    padding: var(--space-md);
+    margin: var(--space-md) 0;
+    text-align: center;
+    display: none;
 }
 
-#game-status {
-    animation: slideIn 0.5s;
-}
-
-/* Animations for adding/removing players */
-.player-input {
-    animation: fadeIn 0.3s;
-}
-
-@keyframes shake {
-    0%, 100% { transform: translateX(0); }
-    25% { transform: translateX(-5px); }
-    75% { transform: translateX(5px); }
-}
-
-.shake {
-    animation: shake 0.3s;
-}
-
-/* Hamburger Menu Button */
+/* ===== HAMBURGER MENU ===== */
 .hamburger-btn {
     position: fixed;
-    top: 20px;
-    right: 20px;
+    top: var(--space-lg);
+    right: var(--space-lg);
     width: 40px;
     height: 40px;
-    background: #7b68ee;
-    border-radius: 50%;
+    background: var(--primary-color);
+    border-radius: var(--border-radius-round);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -325,7 +356,7 @@ h3 {
 }
 
 .hamburger-btn:hover {
-    background: #6a5acd;
+    background: var(--primary-hover);
     transform: scale(1.05);
 }
 
@@ -350,14 +381,14 @@ h3 {
     transform: translateY(-6px) rotate(-45deg);
 }
 
-/* Floating Menu */
+/* ===== FLOATING MENU ===== */
 .floating-menu {
     position: fixed;
     top: 70px;
-    right: 20px;
+    right: var(--space-lg);
     width: 250px;
-    background: white;
-    border-radius: 10px;
+    background: var(--card-bg);
+    border-radius: var(--border-radius-lg);
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
     z-index: 90;
     transform: translateX(300px);
@@ -370,8 +401,8 @@ h3 {
 }
 
 .menu-header {
-    padding: 15px;
-    background: #f5f6fa;
+    padding: var(--space-md);
+    background: var(--bg-color);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -380,25 +411,25 @@ h3 {
 
 .menu-header h3 {
     margin: 0;
-    color: #7b68ee;
+    color: var(--primary-color);
 }
 
 .menu-options {
-    padding: 10px;
+    padding: var(--space-sm);
 }
 
 .menu-btn {
     display: block;
     width: 100%;
-    padding: 12px 15px;
+    padding: var(--space-sm) var(--space-md);
     margin: 5px 0;
     text-align: left;
     background: none;
     border: none;
-    border-radius: 5px;
-    font-family: 'Poppins', sans-serif;
+    border-radius: var(--border-radius-sm);
+    font-family: var(--font-family);
     font-size: 16px;
-    color: #333;
+    color: var(--text-color);
     transition: background 0.2s;
 }
 
@@ -410,16 +441,16 @@ h3 {
     background: none;
     border: none;
     font-size: 24px;
-    color: #7b68ee;
+    color: var(--primary-color);
     cursor: pointer;
     transition: color 0.2s;
 }
 
 .close-btn:hover {
-    color: #6a5acd;
+    color: var(--primary-hover);
 }
 
-/* Modal Styles */
+/* ===== MODAL STYLES ===== */
 .modal {
     position: fixed;
     top: 50%;
@@ -427,8 +458,8 @@ h3 {
     transform: translate(-50%, -50%) scale(0.9);
     width: 90%;
     max-width: 600px;
-    background: white;
-    border-radius: 10px;
+    background: var(--card-bg);
+    border-radius: var(--border-radius-lg);
     z-index: 200;
     opacity: 0;
     visibility: hidden;
@@ -443,7 +474,7 @@ h3 {
 }
 
 .modal-header {
-    padding: 15px 20px;
+    padding: var(--space-md) var(--space-lg);
     border-bottom: 1px solid #eee;
     display: flex;
     justify-content: space-between;
@@ -451,13 +482,13 @@ h3 {
 }
 
 .modal-body {
-    padding: 20px;
+    padding: var(--space-lg);
     max-height: 70vh;
     overflow-y: auto;
 }
 
 .modal-footer {
-    padding: 15px 20px;
+    padding: var(--space-md) var(--space-lg);
     border-top: 1px solid #eee;
     text-align: right;
 }
@@ -466,17 +497,17 @@ h3 {
 .dark-modal {
     max-width: 450px;
     background: #222;
-    border-radius: 8px;
+    border-radius: var(--border-radius-md);
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
 }
 
 .dark-modal .modal-content {
-    border-radius: 8px;
+    border-radius: var(--border-radius-md);
     overflow: hidden;
 }
 
 .dark-modal .modal-header {
-    padding: 15px 20px;
+    padding: var(--space-md) var(--space-lg);
     border-bottom: 1px solid #333;
     background: #222;
 }
@@ -484,18 +515,18 @@ h3 {
 .dark-modal .modal-header h3 {
     color: white;
     font-weight: 500;
-    font-size: 1rem;
+    font-size: var(--font-size-base);
     margin: 0;
 }
 
 .dark-modal .modal-body {
-    padding: 20px;
+    padding: var(--space-lg);
     background: #222;
     text-align: left;
 }
 
 .dark-modal .modal-footer {
-    padding: 12px 20px;
+    padding: var(--space-sm) var(--space-lg);
     background: #222;
     border-top: 1px solid #333;
     text-align: right;
@@ -503,7 +534,7 @@ h3 {
 
 .dark-modal #error-message {
     color: white;
-    font-size: 1rem;
+    font-size: var(--font-size-base);
     margin: 0;
 }
 
@@ -511,9 +542,9 @@ h3 {
     background: #4747eb;
     color: white;
     border: none;
-    padding: 8px 20px;
-    border-radius: 5px;
-    font-family: 'Poppins', sans-serif;
+    padding: var(--space-sm) var(--space-lg);
+    border-radius: var(--border-radius-sm);
+    font-family: var(--font-family);
     font-weight: 500;
     cursor: pointer;
     transition: background 0.2s;
@@ -542,9 +573,9 @@ h3 {
     visibility: visible;
 }
 
-/* Option Styles */
+/* ===== OPTION GROUPS ===== */
 .option-group {
-    margin: 15px 0;
+    margin: var(--space-md) 0;
 }
 
 .option-group label {
@@ -557,22 +588,97 @@ h3 {
     width: 100%;
     padding: 8px;
     border: 1px solid #ddd;
-    border-radius: 4px;
+    border-radius: var(--border-radius-sm);
     background: white;
-    font-family: 'Poppins', sans-serif;
+    font-family: var(--font-family);
 }
 
-/* Typography for modals */
+/* ===== TYPOGRAPHY FOR MODALS ===== */
 .modal h4 {
-    color: #7b68ee;
-    margin: 15px 0 10px;
+    color: var(--primary-color);
+    margin: var(--space-md) 0 var(--space-sm);
 }
 
 .modal p, .modal li {
     line-height: 1.6;
-    margin-bottom: 10px;
+    margin-bottom: var(--space-sm);
 }
 
 .modal ol, .modal ul {
-    padding-left: 20px;
+    padding-left: var(--space-lg);
+}
+
+/* ===== ANIMATIONS ===== */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideIn {
+    from { transform: translateY(20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+}
+
+.shake {
+    animation: shake 0.3s;
+}
+
+.trait-card {
+    animation: fadeIn 0.3s;
+}
+
+#game-status {
+    animation: slideIn 0.5s;
+}
+
+/* ===== MEDIA QUERIES ===== */
+@media (max-width: 768px) {
+    .container {
+        padding: var(--space-sm);
+    }
+    
+    .trait-card {
+        width: 130px;
+        height: 190px;
+    }
+    
+    h1 {
+        font-size: var(--font-size-xxl);
+    }
+    
+    h2 {
+        font-size: var(--font-size-xl);
+    }
+    
+    .btn-large {
+        padding: var(--space-sm) var(--space-lg);
+    }
+}
+
+@media (max-width: 480px) {
+    .trait-card {
+        width: 110px;
+        height: 170px;
+        margin: var(--space-xs);
+        font-size: 0.9rem;
+    }
+    
+    .trait-card h3 {
+        font-size: 1rem;
+    }
+    
+    .game-section {
+        padding: var(--space-sm);
+    }
+    
+    .hamburger-btn {
+        top: var(--space-sm);
+        right: var(--space-sm);
+    }
 }

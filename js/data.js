@@ -1,7 +1,70 @@
 /**
  * Reputations Game - Data Module
- * Contains game data like trait cards.
+ * Contains game data and state management functions.
  */
+
+// Game configuration and default values
+const GameConfig = {
+  // Game modes
+  MODES: {
+    CLASSICAL: 'classical',
+    COMPETITIVE: 'competitive'
+  },
+  
+  // Default settings
+  DEFAULTS: {
+    ROUNDS: 5,
+    MIN_PLAYERS: {
+      CLASSICAL: 2,
+      COMPETITIVE: 3
+    }
+  },
+  
+  // Scoring values
+  SCORING: {
+    EXACT_MATCH: 10,
+    CLOSE_MATCH: 5,
+    MAX_ROUND_POINTS: 50
+  }
+};
+
+// Game state object - central source of truth for game data
+const GameState = {
+  gameMode: GameConfig.MODES.CLASSICAL,
+  players: [],
+  currentSubject: '',
+  currentRound: 0,
+  totalRounds: GameConfig.DEFAULTS.ROUNDS,
+  currentCards: [],
+  subjectRanking: [],
+  informantRanking: [],
+  scores: { team: 0, game: 0 },
+  
+  // Reset the game state to defaults
+  reset() {
+    this.currentRound = 0;
+    this.subjectRanking = [];
+    this.informantRanking = [];
+    this.scores = { team: 0, game: 0 };
+  },
+  
+  // Get minimum players required for current game mode
+  getMinPlayers() {
+    return this.gameMode === GameConfig.MODES.CLASSICAL ? 
+      GameConfig.DEFAULTS.MIN_PLAYERS.CLASSICAL : 
+      GameConfig.DEFAULTS.MIN_PLAYERS.COMPETITIVE;
+  },
+  
+  // Check if a round is complete
+  isRoundComplete() {
+    return this.subjectRanking.length > 0 && this.informantRanking.length > 0;
+  },
+  
+  // Check if the game should end
+  shouldEndGame() {
+    return this.currentRound >= this.totalRounds;
+  }
+};
 
 // Trait cards data
 const traitCards = [
@@ -156,3 +219,15 @@ const traitCards = [
         description: "Up one minute, down the next, unpredictable."
     }
 ];
+
+// Helper to draw random cards
+function getRandomCards(count = 5) {
+  const shuffled = [...traitCards].sort(() => 0.5 - Math.random());
+  return shuffled.slice(0, count);
+}
+
+// Export for use in other modules
+window.GameConfig = GameConfig;
+window.GameState = GameState;
+window.traitCards = traitCards;
+window.getRandomCards = getRandomCards;
