@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reputations | The Personality Card Game</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Reputations</h1>
+        
+        <!-- Main Menu -->
+        <div id="main-menu" class="game-section">
+            <h2>Choose a Game Mode</h2>
+            <button id="classical-btn" class="btn">Classical Mode</button>
+            <button id="competitive-btn" class="btn">Competitive Mode</button>
+        </div>
+        
+        <!-- Player Setup -->
+        <div id="player-setup" class="game-section">
+            <h2>Enter Player Names</h2>
+            <div id="player-inputs"></div>
+            <button id="add-player-btn" class="btn">+ Add Player</button>
+            <button id="start-game-btn" class="btn">Start Game</button>
+        </div>
+        
+        <!-- Game Board -->
+        <div id="game-board" class="game-section">
+            <div class="game-info">
+                <h2 id="game-status">Subject's Turn</h2>
+                <div id="scores">Team: <span id="team-score">0</span> | Game: <span id="game-score">0</span></div>
+            </div>
+            
+            <div class="ranking-scale">
+                <div>Most like me</div>
+                <div>Least like me</div>
+            </div>
+            
+            <div id="cards-container" class="cards-container"></div>
+            
+            <!-- Score feedback panel (initially hidden) -->
+            <div id="score-feedback" class="score-feedback">
+                <h3>Round Results</h3>
+                <div id="points-earned"></div>
+                <div id="match-details"></div>
+            </div>
+            
+            <button id="submit-btn" class="btn">Submit Ranking</button>
+            <button id="next-round-btn" class="btn" style="display: none;">Start Next Round</button>
+        </div>
+        
+        <!-- End Screen -->
+        <div id="end-screen" class="game-section">
+            <h2>Game Over!</h2>
+            <div id="winner"></div>
+            <div id="final-scores"></div>
+            <button id="play-again-btn" class="btn">Play Again</button>
+        </div>
+    </div>
+
+    <script src="js/data.js"></script>
+    <script src="js/game.js"></script>
+</body>
+</html>

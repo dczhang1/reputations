@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reputations | The Personality Card Game</title>
+    <style>
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', Helvetica, Arial, sans-serif;
+            background: linear-gradient(to bottom, #f5f6fa, #e8eaf6);
+            color: #2a2a2a;
+            min-height: 100vh;
+            line-height: 1.6;
+            position: relative;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+        }
+
+        /* Typography */
+        h1 {
+            font-size: 2.2rem;
+            font-weight: 600;
+            color: #5a4db7;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            font-size: 1.6rem;
+            font-weight: 500;
+            color: #5a4db7;
+            margin-bottom: 15px;
+        }
+
+        h3 {
+            font-size: 1.3rem;
+            font-weight: 500;
+            color: #5a4db7;
+            margin-bottom: 10px;
+        }
+
+        p {
+            margin-bottom: 15px;
+        }
+
+        /* Header */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .title {
+            flex: 1;
+            text-align: center;
+        }
+
+        .player-management {
+            display: flex;
+            gap: 10px;
+            padding: 10px;
+        }
+
+        .player-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #e8eaf6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            border: 2px solid transparent;
+        }
+
+        .player-avatar.subject {
+            border-color: #7b68ee;
+        }
+
+        .player-avatar.informant {
+            border-color: #ff8787;
+        }
+
+        .score-display {
+            display: flex;
+            gap: 20px;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .score {
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+
+        .team-score {
+            color: #7b68ee;
+        }
+
+        .game-score {
+            color: #ff8787;
+        }
+
+        /* Instructions Toggle */
+        .instructions-toggle {
+            background-color: #7b68ee;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            font-size: 14px;
+            transition: background-color 0.3s;
+        }
+
+        .instructions-toggle:hover {
+            background-color: #9370db;
+        }
+
+        .instructions-toggle:active {
+            background-color: #5a4db7;
+        }
+
+        /* Main Menu */
+        .main-menu {
+            width: 80%;
+            max-width: 500px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .menu-button {
+            background-color: #7b68ee;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            font-size: 16px;
+            margin: 10px;
+            width: 220px;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        .menu-button:hover {
+            background-color: #9370db;
+            transform: translateY(-2px);
+        }
+
+        .menu-button:active {
+            background-color: #5a4db7;
+            transform: translateY(0);
+        }
+
+        .game-options {
+            margin-top: 30px;
+            text-align: left;
+        }
+
+        .option {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .option select {
+            padding: 8px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+            background-color: white;
+        }
+        
+        /* Player Setup Screen */
+        .player-setup {
+            display: none;
+            width: 80%;
+            max-width: 500px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .player-inputs {
+            margin: 20px 0;
+        }
+
+        .player-input {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .player-input input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+        }
+
+        .player-input .remove-player {
+            background: none;
+            border: none;
+            color: #ff8787;
+            cursor: pointer;
+            font-size: 18px;
+            margin-left: 10px;
+        }
+
+        .add-player-button {
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 600;
+            margin-right: 10px;
+            transition: background-color 0.3s;
+        }
+
+        .add-player-button:hover {
+            background-color: #388e3c;
+        }
+
+        .start-game-button {
+            background-color: #7b68ee;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            font-size: 16px;
+            margin-top: 15px;
+            transition: background-color 0.3s;
+        }
+
+        .start-game-button:hover {
+            background-color: #9370db;
+        }
+
+        /* Game Board */
+        .game-board {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            margin: 20px auto;
+            width: 90%;
+            max-width: 1000px;
+        }
+
+        .cards-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .trait-card {
+            width: 150px;
+            height: 220px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 15px;
+            cursor: grab;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.6s;
+        }
+
+        /* Ranking Scale */
+        .ranking-scale {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto 15px;
+            font-size: 14px;
+            font-weight: 500;
+            color: #5a4db7;
+        }
+
+        .most-like {
+            text-align: left;
+        }
+
+        .least-like {
+            text-align: right;
+        }
+
+        .ranking-indicators {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 10px;
+        }
+
+        .indicator {
+            width: 15px;
+            height: 4px;
+            background-color: #ddd;
+        }
+
+        .indicator.active {
+            background-color: #7b68ee;
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1 class="title">Reputations</h1>
+            <div class="player-management">
+                <!-- Player avatars will be dynamically added here -->
+            </div>
+            <div class="score-display">
+                <div class="score team-score">Team: <span id="team-score">0</span></div>
+                <div class="score game-score">Game: <span id="game-score">0</span></div>
+            </div>
+            <button class="instructions-toggle" id="instructions-toggle">Rules</button>
+        </header>
+
+        <!-- Game Status -->
+        <div class="game-status" id="game-status">
+            <p class="status-message" id="status-message">Select a Game Mode to Begin</p>
+            <div class="timer" id="timer">60</div>
+        </div>
+
+        <!-- Main Menu (Visible at start) -->
+        <div class="main-menu" id="main-menu">
+            <h2>Choose a Game Mode</h2>
+            <button class="menu-button classical-mode" id="classical-mode">Classical Mode</button>
+            <button class="menu-button competitive-mode" id="competitive-mode">Competitive Mode</button>
+            <div class="game-options">
+                <h3>Game Options</h3>
+                <div class="option">
+                    <label for="rounds">Rounds:</label>
+                    <select id="rounds">
+                        <option value="3">3 Rounds</option>
+                        <option value="5" selected>5 Rounds</option>
+                        <option value="10">10 Rounds</option>
+                        <option value="0">Sandbox (No Limit)</option>
+                    </select>
+                </div>
+                <div class="option">
+                    <label for="timer-toggle">Timer:</label>
+                    <input type="checkbox" id="timer-toggle" checked>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Player Setup Screen (Hidden at start) -->
+        <div class="player-setup" id="player-setup">
+            <h2>Enter Player Names</h2>
+            <div class="player-inputs" id="player-inputs">
+                <!-- Player name inputs will be added dynamically -->
+            </div>
+            <button class="add-player-button" id="add-player-button">+ Add Player</button>
+            <button class="start-game-button" id="start-game-button">Start Game</button>
+        </div>
+
+        <!-- Game Board (Hidden at start) -->
+        <div class="game-board" id="game-board">
+            <!-- Ranking scale will be added dynamically -->
+            <div class="cards-container" id="cards-container">
+                <!-- Cards will be dynamically added here -->
+            </div>
+            <button class="submit-button" id="submit-ranking">Submit Ranking</button>
+        </div>
+
+        <!-- Round Indicators -->
+        <div class="round-indicators" id="round-indicators">
+            <!-- Round dots will be dynamically added here -->
+        </div>
+
+        <!-- End Screen (Hidden until game ends) -->
+        <div class="end-screen" id="end-screen">
+            <h2>Game Over!</h2>
+            <div class="winner" id="winner">Winner: Team</div>
+            <div class="final-scores" id="final-scores">
+                <!-- Final scores will be dynamically added here -->
+            </div>
+            <button class="play-again" id="play-again">Play Again</button>
+        </div>
+    </div>
+
+    <script>
+        // This is an inline fix for the player setup screen issue
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log("DOM loaded");
+            
+            // Classical mode button setup
+            document.getElementById('classical-mode').addEventListener('click', function() {
+                console.log("Classical mode clicked");
+                document.getElementById('main-menu').style.display = 'none';
+                document.getElementById('player-setup').style.display = 'block';
+                
+                // Add initial player inputs
+                setupPlayerInputs('classical');
+            });
+            
+            // Competitive mode button setup
+            document.getElementById('competitive-mode').addEventListener('click', function() {
+                console.log("Competitive mode clicked");
+                document.getElementById('main-menu').style.display = 'none';
+                document.getElementById('player-setup').style.display = 'block';
+                
+                // Add initial player inputs
+                setupPlayerInputs('competitive');
+            });
+            
+            // Add player button
+            document.getElementById('add-player-button').addEventListener('click', function() {
+                addPlayerInputField();
+            });
+            
+            // Function to add player inputs based on game mode
+            function setupPlayerInputs(mode) {
+                const playerInputs = document.getElementById('player-inputs');
+                playerInputs.innerHTML = ''; // Clear existing inputs
+                
+                const minPlayers = (mode === 'classical') ? 2 : 3;
+                for (let i = 0; i < minPlayers; i++) {
+                    addPlayerInputField();
+                }
+            }
+            
+            // Function to add a player input field
+            function addPlayerInputField() {
+                const playerInputs = document.getElementById('player-inputs');
+                const playerCount = playerInputs.childElementCount + 1;
+                
+                const inputContainer = document.createElement('div');
+                inputContainer.className = 'player-input';
+                
+                const input = document.createElement('input');
+                input.type = 'text';
+                input.placeholder = `Player ${playerCount}`;
+                
+                const removeButton = document.createElement('button');
+                removeButton.className = 'remove-player';
+                removeButton.innerHTML = '&times;';
+                removeButton.addEventListener('click', function() {
+                    inputContainer.remove();
+                    // Update player input numbers
+                    updatePlayerInputNumbers();
+                });
+                
+                inputContainer.appendChild(input);
+                inputContainer.appendChild(removeButton);
+                playerInputs.appendChild(inputContainer);
+            }
+            
+            // Function to update player input numbers
+            function updatePlayerInputNumbers() {
+                const inputs = document.querySelectorAll('.player-input input');
+                inputs.forEach((input, index) => {
+                    if (input.value === '') {
+                        input.placeholder = `Player ${index + 1}`;
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reputations | The Personality Card Game</title>
+    <link rel="stylesheet" href="styles/styles.css">
+    <link rel="stylesheet" href="styles/icons.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1 class="title">Reputations</h1>
+            <div class="player-management">
+                <!-- Player avatars will be dynamically added here -->
+            </div>
+            <div class="score-display">
+                <div class="score team-score">Team: <span id="team-score">0</span></div>
+                <div class="score game-score">Game: <span id="game-score">0</span></div>
+            </div>
+            <button class="instructions-toggle" id="instructions-toggle">Rules</button>
+        </header>
+
+        <!-- Instructions Panel (Hidden by default) -->
+        <div class="instructions-panel" id="instructions-panel">
+            <h2>How to Play</h2>
+            <p><strong>Objective:</strong> Predict how others rank personality traits about themselves.</p>
+            <h3>Game Flow:</h3>
+            <ol>
+                <li>One player is the "subject", others are "informants".</li>
+                <li>5 trait cards are drawn randomly.</li>
+                <li>The subject ranks traits from "most like me" to "least like me".</li>
+                <li>Informants predict the subject's ranking.</li>
+                <li>Points are scored based on prediction accuracy.</li>
+            </ol>
+            <h3>Game Modes:</h3>
+            <p><strong>Classical:</strong> All players vs. the game.</p>
+            <p><strong>Competitive:</strong> Players compete individually.</p>
+            <button class="close-instructions" id="close-instructions">Close</button>
+        </div>
+
+        <!-- Game Status -->
+        <div class="game-status" id="game-status">
+            <p class="status-message" id="status-message">Select a Game Mode to Begin</p>
+            <div class="timer" id="timer">60</div>
+        </div>
+
+        <!-- Main Menu (Visible at start) -->
+        <div class="main-menu" id="main-menu">
+            <h2>Choose a Game Mode</h2>
+            <button class="menu-button classical-mode" id="classical-mode">Classical Mode</button>
+            <button class="menu-button competitive-mode" id="competitive-mode">Competitive Mode</button>
+            <div class="game-options">
+                <h3>Game Options</h3>
+                <div class="option">
+                    <label for="rounds">Rounds:</label>
+                    <select id="rounds">
+                        <option value="3">3 Rounds</option>
+                        <option value="5" selected>5 Rounds</option>
+                        <option value="10">10 Rounds</option>
+                        <option value="0">Sandbox (No Limit)</option>
+                    </select>
+                </div>
+                <div class="option">
+                    <label for="timer-toggle">Timer:</label>
+                    <input type="checkbox" id="timer-toggle" checked>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Player Setup Screen (Hidden at start) -->
+        <div class="player-setup" id="player-setup">
+            <h2>Enter Player Names</h2>
+            <div class="player-inputs" id="player-inputs">
+                <!-- Player name inputs will be added dynamically -->
+            </div>
+            <button class="add-player-button" id="add-player-button">+ Add Player</button>
+            <button class="start-game-button" id="start-game-button">Start Game</button>
+        </div>
+
+        <!-- Game Board (Hidden at start) -->
+        <div class="game-board" id="game-board">
+            <!-- Ranking scale will be added dynamically -->
+            <div class="cards-container" id="cards-container">
+                <!-- Cards will be dynamically added here -->
+            </div>
+            <button class="submit-button" id="submit-ranking">Submit Ranking</button>
+        </div>
+
+        <!-- Round Indicators -->
+        <div class="round-indicators" id="round-indicators">
+            <!-- Round dots will be dynamically added here -->
+        </div>
+
+        <!-- End Screen (Hidden until game ends) -->
+        <div class="end-screen" id="end-screen">
+            <h2>Game Over!</h2>
+            <div class="winner" id="winner">Winner: Team</div>
+            <div class="final-scores" id="final-scores">
+                <!-- Final scores will be dynamically added here -->
+            </div>
+            <button class="play-again" id="play-again">Play Again</button>
+        </div>
+    </div>
+
+    <script>
+        // Debug script to monitor page state
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log("DOM fully loaded");
+            console.log("Player setup element initial display:", document.getElementById('player-setup').style.display);
+            
+            // Monitor game mode buttons
+            document.getElementById('classical-mode').addEventListener('click', function() {
+                console.log("Classical mode button clicked");
+                setTimeout(() => {
+                    console.log("After click - player setup display:", document.getElementById('player-setup').style.display);
+                }, 100);
+            });
+            
+            document.getElementById('competitive-mode').addEventListener('click', function() {
+                console.log("Competitive mode button clicked");
+                setTimeout(() => {
+                    console.log("After click - player setup display:", document.getElementById('player-setup').style.display);
+                }, 100);
+            });
+        });
+    </script>
+    <script src="scripts/modal.js"></script>
+    <script src="scripts/animations.js"></script>
+    <script src="scripts/traits.js"></script>
+    <script src="scripts/script.js"></script>
+</body>
+</html><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reputations | The Personality Card Game</title>
+    <link rel="stylesheet" href="styles/styles.css">
+    <link rel="stylesheet" href="styles/icons.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1 class="title">Reputations</h1>
+            <div class="player-management">
+                <!-- Player avatars will be dynamically added here -->
+            </div>
+            <div class="score-display">
+                <div class="score team-score">Team: <span id="team-score">0</span></div>
+                <div class="score game-score">Game: <span id="game-score">0</span></div>
+            </div>
+            <button class="instructions-toggle" id="instructions-toggle">Rules</button>
+        </header>
+
+        <!-- Instructions Panel (Hidden by default) -->
+        <div class="instructions-panel" id="instructions-panel">
+            <h2>How to Play</h2>
+            <p><strong>Objective:</strong> Predict how others rank personality traits about themselves.</p>
+            <h3>Game Flow:</h3>
+            <ol>
+                <li>One player is the "subject", others are "informants".</li>
+                <li>5 trait cards are drawn randomly.</li>
+                <li>The subject ranks traits from "most like me" to "least like me".</li>
+                <li>Informants predict the subject's ranking.</li>
+                <li>Points are scored based on prediction accuracy.</li>
+            </ol>
+            <h3>Game Modes:</h3>
+            <p><strong>Classical:</strong> All players vs. the game.</p>
+            <p><strong>Competitive:</strong> Players compete individually.</p>
+            <button class="close-instructions" id="close-instructions">Close</button>
+        </div>
+
+        <!-- Game Status -->
+        <div class="game-status" id="game-status">
+            <p class="status-message" id="status-message">Select a Game Mode to Begin</p>
+            <div class="timer" id="timer">60</div>
+        </div>
+
+        <!-- Main Menu (Visible at start) -->
+        <div class="main-menu" id="main-menu">
+            <h2>Choose a Game Mode</h2>
+            <button class="menu-button classical-mode" id="classical-mode">Classical Mode</button>
+            <button class="menu-button competitive-mode" id="competitive-mode">Competitive Mode</button>
+            <div class="game-options">
+                <h3>Game Options</h3>
+                <div class="option">
+                    <label for="rounds">Rounds:</label>
+                    <select id="rounds">
+                        <option value="3">3 Rounds</option>
+                        <option value="5" selected>5 Rounds</option>
+                        <option value="10">10 Rounds</option>
+                        <option value="0">Sandbox (No Limit)</option>
+                    </select>
+                </div>
+                <div class="option">
+                    <label for="timer-toggle">Timer:</label>
+                    <input type="checkbox" id="timer-toggle" checked>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Player Setup Screen (Hidden at start) -->
+        <div class="player-setup" id="player-setup">
+            <h2>Enter Player Names</h2>
+            <div class="player-inputs" id="player-inputs">
+                <!-- Player name inputs will be added dynamically -->
+            </div>
+            <button class="add-player-button" id="add-player-button">+ Add Player</button>
+            <button class="start-game-button" id="start-game-button">Start Game</button>
+        </div>
+
+        <!-- Game Board (Hidden at start) -->
+        <div class="game-board" id="game-board">
+            <!-- Ranking scale will be added dynamically -->
+            <div class="cards-container" id="cards-container">
+                <!-- Cards will be dynamically added here -->
+            </div>
+            <button class="submit-button" id="submit-ranking">Submit Ranking</button>
+        </div>
+
+        <!-- Round Indicators -->
+        <div class="round-indicators" id="round-indicators">
+            <!-- Round dots will be dynamically added here -->
+        </div>
+
+        <!-- End Screen (Hidden until game ends) -->
+        <div class="end-screen" id="end-screen">
+            <h2>Game Over!</h2>
+            <div class="winner" id="winner">Winner: Team</div>
+            <div class="final-scores" id="final-scores">
+                <!-- Final scores will be dynamically added here -->
+            </div>
+            <button class="play-again" id="play-again">Play Again</button>
+        </div>
+    </div>
+
+    <script src="scripts/modal.js"></script>
+    <script src="scripts/animations.js"></script>
+    <script src="scripts/traits.js"></script>
+    <script src="scripts/script.js"></script>
+</body>
+</html>
