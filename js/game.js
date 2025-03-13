@@ -72,8 +72,44 @@ function addPlayerInput() {
     input.type = 'text';
     input.placeholder = `Player ${playerCount}`;
     
+    // Add remove button
+    const removeBtn = document.createElement('button');
+    removeBtn.className = 'remove-player-btn';
+    removeBtn.innerHTML = '&times;'; // × symbol
+    removeBtn.title = 'Remove player';
+    removeBtn.addEventListener('click', function() {
+        removePlayerInput(div);
+    });
+    
     div.appendChild(input);
+    div.appendChild(removeBtn);
     container.appendChild(div);
+}
+
+/**
+ * Removes a player input field from the setup screen
+ * @param {Element} playerInputDiv - The player input div to remove
+ */
+function removePlayerInput(playerInputDiv) {
+    const container = document.getElementById('player-inputs');
+    const minPlayers = (gameMode === 'classical') ? 2 : 3;
+    
+    // Check if we're at minimum players
+    if (container.childElementCount <= minPlayers) {
+        alert(`You need at least ${minPlayers} players for ${gameMode} mode`);
+        return;
+    }
+    
+    // Remove the player input
+    container.removeChild(playerInputDiv);
+    
+    // Update the placeholder numbers for remaining inputs
+    const inputs = container.querySelectorAll('.player-input input');
+    inputs.forEach((input, index) => {
+        input.placeholder = `Player ${index + 1}`;
+    });
+    
+    console.log("Player input removed");
 }
 
 /**
@@ -89,8 +125,9 @@ function startGame() {
     });
     
     // Check minimum players
-    if (players.length < 2) {
-        alert('You need at least 2 players to start the game');
+    const minPlayers = (gameMode === 'classical') ? 2 : 3;
+    if (players.length < minPlayers) {
+        alert(`You need at least ${minPlayers} players for ${gameMode} mode`);
         return;
     }
     
