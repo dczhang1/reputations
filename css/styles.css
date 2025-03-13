@@ -30,9 +30,38 @@ button {
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
-#main-menu { 
+#start-menu { 
     display: block; 
     text-align: center; 
+    padding: 40px 20px;
+}
+
+/* Start Menu Styling */
+.tagline {
+    color: #666;
+    margin-bottom: 30px;
+    font-size: 1.1rem;
+}
+
+.start-menu-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    max-width: 300px;
+    margin: 0 auto;
+}
+
+.btn-large {
+    padding: 15px 30px;
+    font-size: 1.1rem;
+}
+
+.btn-secondary {
+    background: #ff8787;
+}
+
+.btn-secondary:hover {
+    background: #ff6b6b;
 }
 
 /* Cards */

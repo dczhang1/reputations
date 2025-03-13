@@ -11,11 +11,23 @@
     <div class="container">
         <h1>Reputations</h1>
         
-        <!-- Main Menu -->
+        <!-- Start Menu (New) -->
+        <div id="start-menu" class="game-section">
+            <h2>Welcome to Reputations</h2>
+            <p class="tagline">The personality card game that tests how well you know each other</p>
+            <div class="start-menu-buttons">
+                <button id="new-game-menu-btn" class="btn btn-large">New Game</button>
+                <button id="options-menu-btn" class="btn btn-large">Options</button>
+                <button id="rules-menu-btn" class="btn btn-large">Rules</button>
+            </div>
+        </div>
+        
+        <!-- Main Menu (Game Mode Selection) -->
         <div id="main-menu" class="game-section">
             <h2>Choose a Game Mode</h2>
             <button id="classical-btn" class="btn">Classical Mode</button>
             <button id="competitive-btn" class="btn">Competitive Mode</button>
+            <button id="back-to-start-btn" class="btn btn-secondary">Back</button>
         </div>
         
         <!-- Player Setup -->
@@ -24,6 +36,7 @@
             <div id="player-inputs"></div>
             <button id="add-player-btn" class="btn">+ Add Player</button>
             <button id="start-game-btn" class="btn">Start Game</button>
+            <button id="back-to-modes-btn" class="btn btn-secondary">Back</button>
         </div>
         
         <!-- Game Board -->

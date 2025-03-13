@@ -4,6 +4,7 @@
  */
 
 // DOM elements
+const startMenu = document.getElementById('start-menu');
 const mainMenu = document.getElementById('main-menu');
 const playerSetup = document.getElementById('player-setup');
 const gameBoard = document.getElementById('game-board');
@@ -34,6 +35,28 @@ let scores = { team: 0, game: 0 };
 
 // Initialize game
 document.addEventListener('DOMContentLoaded', function() {
+    // Start Menu navigation
+    document.getElementById('new-game-menu-btn').addEventListener('click', function() {
+        showScreen(mainMenu);
+    });
+    
+    document.getElementById('options-menu-btn').addEventListener('click', function() {
+        showModal(optionsModal);
+    });
+    
+    document.getElementById('rules-menu-btn').addEventListener('click', function() {
+        showModal(rulesModal);
+    });
+    
+    // Back buttons
+    document.getElementById('back-to-start-btn').addEventListener('click', function() {
+        showScreen(startMenu);
+    });
+    
+    document.getElementById('back-to-modes-btn').addEventListener('click', function() {
+        showScreen(mainMenu);
+    });
+    
     // Mode selection
     document.getElementById('classical-btn').addEventListener('click', function() {
         showPlayerSetup('classical');
@@ -60,6 +83,22 @@ document.addEventListener('DOMContentLoaded', function() {
     
     console.log("Game initialized");
 });
+
+/**
+ * Helper function to show a specific screen and hide others
+ * @param {Element} screenToShow - The screen element to display
+ */
+function showScreen(screenToShow) {
+    // Hide all screens
+    startMenu.style.display = 'none';
+    mainMenu.style.display = 'none';
+    playerSetup.style.display = 'none';
+    gameBoard.style.display = 'none';
+    endScreen.style.display = 'none';
+    
+    // Show the requested screen
+    screenToShow.style.display = 'block';
+}
 
 /**
  * Initializes the hamburger menu and all related UI components
@@ -170,8 +209,7 @@ function saveOptions() {
  */
 function showPlayerSetup(mode) {
     gameMode = mode;
-    mainMenu.style.display = 'none';
-    playerSetup.style.display = 'block';
+    showScreen(playerSetup);
     
     // Clear previous inputs
     document.getElementById('player-inputs').innerHTML = '';
@@ -263,8 +301,7 @@ function startGame() {
     scores = { team: 0, game: 0 };
     
     // Show game board
-    playerSetup.style.display = 'none';
-    gameBoard.style.display = 'block';
+    showScreen(gameBoard);
     
     // Start first round
     prepareNewRound();
@@ -546,8 +583,7 @@ function highlightMatches() {
  * Ends the game and shows final results
  */
 function endGame() {
-    gameBoard.style.display = 'none';
-    endScreen.style.display = 'block';
+    showScreen(endScreen);
     
     if (scores.team > scores.game) {
         document.getElementById('winner').textContent = 'Team Wins!';
@@ -564,13 +600,11 @@ function endGame() {
 }
 
 /**
- * Resets game to main menu
+ * Resets game to start menu
  */
 function resetGame() {
-    endScreen.style.display = 'none';
-    gameBoard.style.display = 'none';
-    playerSetup.style.display = 'none';
-    mainMenu.style.display = 'block';
+    // Show start menu
+    showScreen(startMenu);
     
     // Reset variables
     subjectRanking = [];
