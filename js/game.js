@@ -19,6 +19,8 @@ const floatingMenu = document.getElementById('floating-menu');
 const overlay = document.getElementById('overlay');
 const rulesModal = document.getElementById('rules-modal');
 const optionsModal = document.getElementById('options-modal');
+const errorModal = document.getElementById('error-modal');
+const errorMessage = document.getElementById('error-message');
 const currentRoundDisplay = document.getElementById('current-round');
 const totalRoundsDisplay = document.getElementById('total-rounds');
 
@@ -75,6 +77,11 @@ document.addEventListener('DOMContentLoaded', function() {
     nextRoundBtn.addEventListener('click', startNewRound);
     document.getElementById('play-again-btn').addEventListener('click', resetGame);
     
+    // Error modal
+    document.getElementById('error-ok-btn').addEventListener('click', function() {
+        hideModal(errorModal);
+    });
+    
     // Set initial total rounds display
     totalRoundsDisplay.textContent = totalRounds;
     
@@ -83,6 +90,15 @@ document.addEventListener('DOMContentLoaded', function() {
     
     console.log("Game initialized");
 });
+
+/**
+ * Custom alert function that uses our styled modal
+ * @param {string} message - The message to display
+ */
+function showError(message) {
+    errorMessage.textContent = message;
+    showModal(errorModal);
+}
 
 /**
  * Helper function to show a specific screen and hide others
@@ -189,6 +205,7 @@ function hideModal(modal) {
 function hideAllModals() {
     rulesModal.classList.remove('show');
     optionsModal.classList.remove('show');
+    errorModal.classList.remove('show');
     overlay.classList.remove('show');
 }
 
@@ -261,7 +278,7 @@ function removePlayerInput(playerInputDiv) {
     
     // Check if we're at minimum players
     if (container.childElementCount <= minPlayers) {
-        alert(`You need at least ${minPlayers} players for ${gameMode} mode`);
+        showError(`You need at least ${minPlayers} players for ${gameMode} mode`);
         return;
     }
     
@@ -292,7 +309,7 @@ function startGame() {
     // Check minimum players
     const minPlayers = (gameMode === 'classical') ? 2 : 3;
     if (players.length < minPlayers) {
-        alert(`You need at least ${minPlayers} players for ${gameMode} mode`);
+        showError(`You need at least ${minPlayers} players for ${gameMode} mode`);
         return;
     }
     
@@ -440,7 +457,7 @@ function submitRanking() {
     // Check that all cards are ranked
     const rankedCards = document.querySelectorAll('.trait-card .card-rank');
     if (rankedCards.length !== 5) {
-        alert('Please rank all 5 traits before submitting');
+        showError('Please rank all 5 traits before submitting');
         return;
     }
     

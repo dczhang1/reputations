@@ -433,6 +433,68 @@ h3 {
     text-align: right;
 }
 
+/* Dark Error Modal Specific Styling */
+.dark-modal {
+    max-width: 450px;
+    background: #222;
+    border-radius: 8px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
+}
+
+.dark-modal .modal-content {
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.dark-modal .modal-header {
+    padding: 15px 20px;
+    border-bottom: 1px solid #333;
+    background: #222;
+}
+
+.dark-modal .modal-header h3 {
+    color: white;
+    font-weight: 500;
+    font-size: 1rem;
+    margin: 0;
+}
+
+.dark-modal .modal-body {
+    padding: 20px;
+    background: #222;
+    text-align: left;
+}
+
+.dark-modal .modal-footer {
+    padding: 12px 20px;
+    background: #222;
+    border-top: 1px solid #333;
+    text-align: right;
+}
+
+.dark-modal #error-message {
+    color: white;
+    font-size: 1rem;
+    margin: 0;
+}
+
+.btn-ok {
+    background: #4747eb;
+    color: white;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 5px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s;
+    min-width: 80px;
+}
+
+.btn-ok:hover {
+    background: #3939cd;
+}
+
 .overlay {
     position: fixed;
     top: 0;
