@@ -18,6 +18,19 @@ const floatingMenu = document.getElementById('floating-menu');
 const overlay = document.getElementById('overlay');
 const rulesModal = document.getElementById('rules-modal');
 const optionsModal = document.getElementById('options-modal');
+const currentRoundDisplay = document.getElementById('current-round');
+const totalRoundsDisplay = document.getElementById('total-rounds');
+
+// Game variables
+let gameMode = 'classical'; // classical or competitive
+let players = [];
+let currentSubject = '';
+let currentRound = 0;
+let totalRounds = 5; // Default value
+let currentCards = [];
+let subjectRanking = [];
+let informantRanking = [];
+let scores = { team: 0, game: 0 };
 
 // Initialize game
 document.addEventListener('DOMContentLoaded', function() {
@@ -38,6 +51,9 @@ document.addEventListener('DOMContentLoaded', function() {
     submitBtn.addEventListener('click', submitRanking);
     nextRoundBtn.addEventListener('click', startNewRound);
     document.getElementById('play-again-btn').addEventListener('click', resetGame);
+    
+    // Set initial total rounds display
+    totalRoundsDisplay.textContent = totalRounds;
     
     // Hamburger menu and floating menu
     initializeMenu();
@@ -143,6 +159,8 @@ function hideAllModals() {
 function saveOptions() {
     const roundsSelect = document.getElementById('rounds-select');
     totalRounds = parseInt(roundsSelect.value);
+    totalRoundsDisplay.textContent = totalRounds;
+    
     console.log(`Game options updated: ${totalRounds} rounds`);
 }
 
@@ -255,6 +273,14 @@ function startGame() {
 }
 
 /**
+ * Updates the round indicator text
+ */
+function updateRoundIndicator() {
+    currentRoundDisplay.textContent = currentRound;
+    totalRoundsDisplay.textContent = totalRounds;
+}
+
+/**
  * Prepares for a new round
  */
 function prepareNewRound() {
@@ -273,6 +299,9 @@ function prepareNewRound() {
         endGame();
         return;
     }
+    
+    // Update round indicator
+    updateRoundIndicator();
     
     // Assign subject (rotate through players)
     currentSubject = players[(currentRound - 1) % players.length];
@@ -549,6 +578,9 @@ function resetGame() {
     scores = { team: 0, game: 0 };
     currentRound = 0;
     
+    // Reset round display
+    currentRoundDisplay.textContent = '1';
+    totalRoundsDisplay.textContent = totalRounds;
+    
     console.log("Game reset");
 }
-    
