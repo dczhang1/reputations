@@ -368,6 +368,9 @@ function prepareNewRound() {
     document.getElementById('game-score').textContent = scores.game;
     gameStatus.textContent = `Subject (${currentSubject}) - Rank traits from most to least like you`;
     
+    // Make sure ranking scale is visible during ranking phase
+    document.querySelector('.ranking-scale').style.display = 'flex';
+    
     // Show submit button, hide next round button
     submitBtn.style.display = 'inline-block';
     nextRoundBtn.style.display = 'none';
@@ -557,9 +560,14 @@ function compareRankings() {
     // Show score feedback
     document.getElementById('points-earned').textContent = `Points earned: ${matchPoints}`;
     document.getElementById('match-details').innerHTML = matchDetails.join('<br>');
+    document.getElementById('current-round-results').textContent = currentRound;
+    document.getElementById('total-rounds-results').textContent = totalRounds;
     scoreFeedback.style.display = 'block';
     
-    // Highlight matches
+    // Make ranking scale visible again
+    document.querySelector('.ranking-scale').style.display = 'flex';
+    
+    // Highlight and reorder matches
     highlightMatches();
     
     // Hide submit button, show next round button
@@ -570,29 +578,59 @@ function compareRankings() {
 }
 
 /**
- * Highlights matching and mismatching cards
+ * Highlights matching and mismatching cards and reorders them based on subject's ranking
  */
 function highlightMatches() {
-    const cards = document.querySelectorAll('.trait-card');
+    const cardsContainer = document.getElementById('cards-container');
+    const cards = Array.from(document.querySelectorAll('.trait-card'));
     
-    cards.forEach(card => {
-        const cardId = parseInt(card.dataset.id);
-        const subjectPosition = subjectRanking.indexOf(cardId);
-        const informantPosition = informantRanking.indexOf(cardId);
+    // Clear the container first
+    cardsContainer.innerHTML = '';
+    
+    // Create array to hold ordered cards
+    const orderedCards = [];
+    
+    // For each position in the subject's ranking
+    for (let i = 0; i < subjectRanking.length; i++) {
+        const cardId = subjectRanking[i];
+        // Find the corresponding card element
+        const card = cards.find(card => parseInt(card.dataset.id) === cardId);
         
-        if (subjectPosition === informantPosition) {
-            // Exact match
-            card.style.border = '2px solid green';
-            card.style.backgroundColor = '#e8f5e9';
-        } else if (Math.abs(subjectPosition - informantPosition) === 1) {
-            // Close match
-            card.style.border = '2px solid orange';
-            card.style.backgroundColor = '#fff8e1';
-        } else {
-            // No match
-            card.style.border = '2px solid red';
-            card.style.backgroundColor = '#ffebee';
+        if (card) {
+            // Clone the card to avoid reference issues
+            const cardClone = card.cloneNode(true);
+            
+            // Remove any existing rank badges
+            const existingRank = cardClone.querySelector('.card-rank');
+            if (existingRank) {
+                existingRank.remove();
+            }
+            
+            // Get the informant's ranking position for this card
+            const informantPosition = informantRanking.indexOf(cardId);
+            
+            // Style based on match accuracy
+            if (i === informantPosition) {
+                // Exact match
+                cardClone.style.border = '2px solid green';
+                cardClone.style.backgroundColor = '#e8f5e9';
+            } else if (Math.abs(i - informantPosition) === 1) {
+                // Close match
+                cardClone.style.border = '2px solid orange';
+                cardClone.style.backgroundColor = '#fff8e1';
+            } else {
+                // No match
+                cardClone.style.border = '2px solid red';
+                cardClone.style.backgroundColor = '#ffebee';
+            }
+            
+            orderedCards.push(cardClone);
         }
+    }
+    
+    // Add all cards to the container in the correct order
+    orderedCards.forEach(card => {
+        cardsContainer.appendChild(card);
     });
 }
 
