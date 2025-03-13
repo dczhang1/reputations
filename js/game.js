@@ -8,6 +8,9 @@ const GameController = {
   // Cache DOM elements for improved performance
   elements: {},
   
+  // Store last round scores for highlighting changes
+  lastScores: { team: 0, game: 0 },
+  
   /**
    * Initialize the game
    */
@@ -152,6 +155,9 @@ const GameController = {
     GameState.players = playerNames;
     GameState.reset();
     
+    // Reset score tracking
+    GameController.lastScores = { team: 0, game: 0 };
+    
     // Show game board
     UIController.showScreen('gameBoard');
     
@@ -281,6 +287,12 @@ const GameController = {
   compareRankings() {
     console.log("Comparing: Subject", GameState.subjectRanking, "Informant", GameState.informantRanking);
     
+    // Store current scores before updating
+    GameController.lastScores = {
+      team: GameState.scores.team,
+      game: GameState.scores.game
+    };
+    
     // Calculate points
     let matchPoints = 0;
     const matchDetails = [];
@@ -309,6 +321,8 @@ const GameController = {
     
     // Show results
     UIController.setGameStatus(`Round ${GameState.currentRound} Complete`);
+    
+    // Update score display with new score changes
     UIController.updateScoreDisplay();
     
     // Show score feedback
@@ -345,8 +359,21 @@ const GameController = {
       document.getElementById('winner').textContent = 'It\'s a tie!';
     }
     
-    document.getElementById('final-scores').textContent = 
-      `Final Score - Team: ${GameState.scores.team} | Game: ${GameState.scores.game}`;
+    // Create a styled final scoreboard
+    const finalScoreboardHTML = `
+      <div class="scoreboard">
+        <div class="score-container team-score">
+          <div class="score-label">Team</div>
+          <div class="score-value">${GameState.scores.team}</div>
+        </div>
+        <div class="score-container game-score">
+          <div class="score-label">Game</div>
+          <div class="score-value">${GameState.scores.game}</div>
+        </div>
+      </div>
+    `;
+    
+    document.getElementById('final-scores').innerHTML = finalScoreboardHTML;
     
     console.log("Game ended. Final scores:", GameState.scores);
   },
@@ -360,6 +387,9 @@ const GameController = {
     
     // Reset game state
     GameState.reset();
+    
+    // Reset score tracking
+    GameController.lastScores = { team: 0, game: 0 };
     
     // Reset round display
     UIController.updateRoundDisplay();
@@ -483,9 +513,66 @@ const UIController = {
   },
   
   /**
-   * Update the score display
+   * Update the score display with animated changes
    */
   updateScoreDisplay() {
+    // Calculate score changes
+    const teamChange = GameState.scores.team - GameController.lastScores.team;
+    const gameChange = GameState.scores.game - GameController.lastScores.game;
+    
+    // Create scoreboard HTML if it doesn't exist
+    if (!document.getElementById('scoreboard')) {
+      const scoreboardHTML = `
+        <div id="scoreboard" class="scoreboard">
+          <div class="score-container team-score">
+            <div class="score-label">Team</div>
+            <div class="score-value" id="team-score-value">${GameState.scores.team}</div>
+            ${teamChange > 0 ? `<div class="score-change">(+${teamChange})</div>` : ''}
+          </div>
+          <div class="score-container game-score">
+            <div class="score-label">Game</div>
+            <div class="score-value" id="game-score-value">${GameState.scores.game}</div>
+            ${gameChange > 0 ? `<div class="score-change">(+${gameChange})</div>` : ''}
+          </div>
+        </div>
+      `;
+      
+      // Insert scoreboard
+      const scores = document.getElementById('scores');
+      scores.innerHTML = scoreboardHTML;
+    } else {
+      // Update existing scoreboard
+      document.getElementById('team-score-value').textContent = GameState.scores.team;
+      document.getElementById('game-score-value').textContent = GameState.scores.game;
+      
+      // Add change indicators if there are changes
+      const teamScoreContainer = document.querySelector('.team-score');
+      const gameScoreContainer = document.querySelector('.game-score');
+      
+      // Remove previous change indicators
+      const existingTeamChange = teamScoreContainer.querySelector('.score-change');
+      const existingGameChange = gameScoreContainer.querySelector('.score-change');
+      
+      if (existingTeamChange) teamScoreContainer.removeChild(existingTeamChange);
+      if (existingGameChange) gameScoreContainer.removeChild(existingGameChange);
+      
+      // Add new change indicators if there are changes
+      if (teamChange > 0) {
+        const teamChangeEl = document.createElement('div');
+        teamChangeEl.className = 'score-change';
+        teamChangeEl.textContent = `(+${teamChange})`;
+        teamScoreContainer.appendChild(teamChangeEl);
+      }
+      
+      if (gameChange > 0) {
+        const gameChangeEl = document.createElement('div');
+        gameChangeEl.className = 'score-change';
+        gameChangeEl.textContent = `(+${gameChange})`;
+        gameScoreContainer.appendChild(gameChangeEl);
+      }
+    }
+    
+    // Keep compatibility with old references
     GameController.elements.gameBoard.teamScore.textContent = GameState.scores.team;
     GameController.elements.gameBoard.gameScore.textContent = GameState.scores.game;
   },

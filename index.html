@@ -44,7 +44,12 @@
         <div id="game-board" class="game-section">
             <div class="game-info">
                 <h2 id="game-status">Subject's Turn</h2>
-                <div id="scores">Team: <span id="team-score">0</span> | Game: <span id="game-score">0</span></div>
+                <div id="scores">
+    <!-- Scoreboard will be dynamically inserted here -->
+                <div id="team-score" style="display: none;">0</div>
+                <div id="game-score" style="display: none;">0</div>
+            </div>
+                    
             </div>
             
             <!-- Round Indicator -->
@@ -68,7 +73,7 @@
                     Round <span id="current-round-results">1</span> of <span id="total-rounds-results">5</span>
                 </div>
                 <div id="points-earned"></div>
-                <div id="match-details"></div>
+                <div id="match-details" style="display: none;"></div>
             </div>
             
             <button id="submit-btn" class="btn">Submit Ranking</button>

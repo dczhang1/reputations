@@ -287,6 +287,74 @@ p, li {
     text-align: center;
 }
 
+/* ===== ENHANCED SCOREBOARD STYLING ===== */
+.scoreboard {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin: 2rem auto;
+  padding: 1.5rem;
+  background: linear-gradient(135deg, #f0f2f7, #e5e8f5);
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(123, 104, 238, 0.15);
+  border: 2px solid #7b68ee;
+}
+
+.score-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem 2rem;
+  border-radius: 8px;
+  min-width: 150px;
+}
+
+.team-score {
+  background-color: rgba(123, 104, 238, 0.1);
+  border: 2px solid #7b68ee;
+}
+
+.game-score {
+  background-color: rgba(255, 135, 135, 0.1);
+  border: 2px solid #ff8787;
+}
+
+.score-label {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #2a2a2a;
+}
+
+.score-value {
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.team-score .score-label, .team-score .score-value {
+  color: #5a4db7;
+}
+
+.game-score .score-label, .game-score .score-value {
+  color: #ff6b6b;
+}
+
+.score-change {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-top: 0.25rem;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+.team-score .score-change {
+  color: #4caf50;
+}
+
+.game-score .score-change {
+  color: #ff6b6b;
+}
+
 /* ===== ROUND INDICATOR ===== */
 .round-indicator {
     text-align: center;
@@ -659,7 +727,36 @@ p, li {
     .btn-large {
         padding: var(--space-sm) var(--space-lg);
     }
-}
+    
+    
+    .scoreboard {
+      /* Reduce padding */
+      padding: 1rem;
+      /* Reduce overall max-width if desired */
+      max-width: 300px;
+    }
+
+    .score-container {
+      /* Reduce padding */
+      padding: 0.75rem 1.5rem;
+      /* Reduce min-width */
+      min-width: 60px;
+    }
+
+    .score-label {
+      /* Reduce font size */
+      font-size: 1rem;
+    }
+
+    .score-value {
+      /* Reduce font size */
+      font-size: 1.0rem;
+    }
+
+    .score-change {
+      /* Reduce font size */
+      font-size: 0.675rem;
+    }
 
 @media (max-width: 480px) {
     .trait-card {
