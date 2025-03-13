@@ -60,6 +60,80 @@
         </div>
     </div>
 
+    <!-- Hamburger Menu Button -->
+    <div id="hamburger-btn" class="hamburger-btn">
+        <div class="hamburger-line"></div>
+        <div class="hamburger-line"></div>
+        <div class="hamburger-line"></div>
+    </div>
+
+    <!-- Floating Game Menu -->
+    <div id="floating-menu" class="floating-menu">
+        <div class="menu-header">
+            <h3>Game Menu</h3>
+            <button id="close-menu-btn" class="close-btn">&times;</button>
+        </div>
+        <div class="menu-options">
+            <button id="new-game-btn" class="menu-btn">New Game</button>
+            <button id="options-btn" class="menu-btn">Options</button>
+            <button id="rules-btn" class="menu-btn">Game Rules</button>
+        </div>
+    </div>
+
+    <!-- Rules Modal -->
+    <div id="rules-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Reputations Game Rules</h3>
+                <button id="close-rules-btn" class="close-btn">&times;</button>
+            </div>
+            <div class="modal-body">
+                <h4>Game Objective</h4>
+                <p>Reputations is a card game centered around players predicting the personality of others.</p>
+                
+                <h4>Game Flow</h4>
+                <ol>
+                    <li>One player is designated as the "subject"</li>
+                    <li>Five trait cards are drawn randomly</li>
+                    <li>The subject ranks the traits from "most like me" to "least like me"</li>
+                    <li>The informants then predict the order the subject ranked the traits</li>
+                    <li>Points are scored based on prediction accuracy</li>
+                </ol>
+                
+                <h4>Scoring</h4>
+                <p>Exact matches: +10 points<br>
+                Close matches (off by one position): +5 points</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Options Modal -->
+    <div id="options-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Game Options</h3>
+                <button id="close-options-btn" class="close-btn">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="option-group">
+                    <label for="rounds-select">Number of Rounds:</label>
+                    <select id="rounds-select">
+                        <option value="3">3 Rounds</option>
+                        <option value="5" selected>5 Rounds</option>
+                        <option value="7">7 Rounds</option>
+                        <option value="10">10 Rounds</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="save-options-btn" class="btn">Save Options</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Overlay for modals -->
+    <div id="overlay" class="overlay"></div>
+
     <script src="js/data.js"></script>
     <script src="js/game.js"></script>
 </body>

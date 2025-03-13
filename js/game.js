@@ -13,6 +13,11 @@ const gameStatus = document.getElementById('game-status');
 const submitBtn = document.getElementById('submit-btn');
 const nextRoundBtn = document.getElementById('next-round-btn');
 const scoreFeedback = document.getElementById('score-feedback');
+const hamburgerBtn = document.getElementById('hamburger-btn');
+const floatingMenu = document.getElementById('floating-menu');
+const overlay = document.getElementById('overlay');
+const rulesModal = document.getElementById('rules-modal');
+const optionsModal = document.getElementById('options-modal');
 
 // Initialize game
 document.addEventListener('DOMContentLoaded', function() {
@@ -34,8 +39,112 @@ document.addEventListener('DOMContentLoaded', function() {
     nextRoundBtn.addEventListener('click', startNewRound);
     document.getElementById('play-again-btn').addEventListener('click', resetGame);
     
+    // Hamburger menu and floating menu
+    initializeMenu();
+    
     console.log("Game initialized");
 });
+
+/**
+ * Initializes the hamburger menu and all related UI components
+ */
+function initializeMenu() {
+    // Hamburger button toggle
+    hamburgerBtn.addEventListener('click', function() {
+        this.classList.toggle('active');
+        floatingMenu.classList.toggle('show');
+    });
+    
+    // Close menu when clicking outside
+    document.addEventListener('click', function(event) {
+        if (!hamburgerBtn.contains(event.target) && 
+            !floatingMenu.contains(event.target) &&
+            floatingMenu.classList.contains('show')) {
+            hamburgerBtn.classList.remove('active');
+            floatingMenu.classList.remove('show');
+        }
+    });
+    
+    // Menu options
+    document.getElementById('new-game-btn').addEventListener('click', function() {
+        resetGame();
+        hamburgerBtn.classList.remove('active');
+        floatingMenu.classList.remove('show');
+    });
+    
+    document.getElementById('options-btn').addEventListener('click', function() {
+        showModal(optionsModal);
+        hamburgerBtn.classList.remove('active');
+        floatingMenu.classList.remove('show');
+    });
+    
+    document.getElementById('rules-btn').addEventListener('click', function() {
+        showModal(rulesModal);
+        hamburgerBtn.classList.remove('active');
+        floatingMenu.classList.remove('show');
+    });
+    
+    // Close buttons for modals
+    document.getElementById('close-menu-btn').addEventListener('click', function() {
+        hamburgerBtn.classList.remove('active');
+        floatingMenu.classList.remove('show');
+    });
+    
+    document.getElementById('close-rules-btn').addEventListener('click', function() {
+        hideModal(rulesModal);
+    });
+    
+    document.getElementById('close-options-btn').addEventListener('click', function() {
+        hideModal(optionsModal);
+    });
+    
+    // Overlay click to close modals
+    overlay.addEventListener('click', function() {
+        hideAllModals();
+    });
+    
+    // Save options
+    document.getElementById('save-options-btn').addEventListener('click', function() {
+        saveOptions();
+        hideModal(optionsModal);
+    });
+}
+
+/**
+ * Shows a modal and the overlay
+ * @param {Element} modal - The modal element to show
+ */
+function showModal(modal) {
+    overlay.classList.add('show');
+    modal.classList.add('show');
+}
+
+/**
+ * Hides a specific modal
+ * @param {Element} modal - The modal element to hide
+ */
+function hideModal(modal) {
+    modal.classList.remove('show');
+    overlay.classList.remove('show');
+}
+
+/**
+ * Hides all modals and overlay
+ */
+function hideAllModals() {
+    rulesModal.classList.remove('show');
+    optionsModal.classList.remove('show');
+    overlay.classList.remove('show');
+}
+
+/**
+ * Saves game options
+ */
+function saveOptions() {
+    const roundsSelect = document.getElementById('rounds-select');
+    totalRounds = parseInt(roundsSelect.value);
+    console.log(`Game options updated: ${totalRounds} rounds`);
+}
 
 /**
  * Shows the player setup screen for the selected game mode
@@ -430,6 +539,16 @@ function endGame() {
  */
 function resetGame() {
     endScreen.style.display = 'none';
+    gameBoard.style.display = 'none';
+    playerSetup.style.display = 'none';
     mainMenu.style.display = 'block';
+    
+    // Reset variables
+    subjectRanking = [];
+    informantRanking = [];
+    scores = { team: 0, game: 0 };
+    currentRound = 0;
+    
     console.log("Game reset");
 }
+    
