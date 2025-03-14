@@ -726,17 +726,44 @@ const UIController = {
         
         // Style based on match accuracy
         if (i === informantPosition) {
-          // Exact match
-          cardClone.style.border = '2px solid green';
-          cardClone.style.backgroundColor = '#e8f5e9';
+          // Exact match - Forest green with gold border
+          cardClone.style.border = '2px solid #D4A017';
+          cardClone.style.backgroundColor = '#E8D8A2';
+          cardClone.style.boxShadow = '0 3px 10px rgba(46, 74, 45, 0.5)';
+          
+          // Add a small indicator of success
+          const matchBadge = document.createElement('div');
+          matchBadge.style.position = 'absolute';
+          matchBadge.style.bottom = '5px';
+          matchBadge.style.right = '5px';
+          matchBadge.style.width = '15px';
+          matchBadge.style.height = '15px';
+          matchBadge.style.borderRadius = '50%';
+          matchBadge.style.backgroundColor = '#2E4A2D';
+          matchBadge.style.border = '1px solid #D4A017';
+          cardClone.appendChild(matchBadge);
         } else if (Math.abs(i - informantPosition) === 1) {
-          // Close match
-          cardClone.style.border = '2px solid orange';
-          cardClone.style.backgroundColor = '#fff8e1';
+          // Close match - Amber
+          cardClone.style.border = '2px solid #9B591F';
+          cardClone.style.backgroundColor = '#E5D59A';
+          cardClone.style.boxShadow = '0 3px 8px rgba(155, 89, 31, 0.4)';
+          
+          // Add a small indicator of partial success
+          const matchBadge = document.createElement('div');
+          matchBadge.style.position = 'absolute';
+          matchBadge.style.bottom = '5px';
+          matchBadge.style.right = '5px';
+          matchBadge.style.width = '15px';
+          matchBadge.style.height = '15px';
+          matchBadge.style.borderRadius = '50%';
+          matchBadge.style.backgroundColor = '#9B591F';
+          matchBadge.style.border = '1px solid #D4A017';
+          cardClone.appendChild(matchBadge);
         } else {
-          // No match
-          cardClone.style.border = '2px solid red';
-          cardClone.style.backgroundColor = '#ffebee';
+          // No match - Burgundy
+          cardClone.style.border = '2px solid #800020';
+          cardClone.style.backgroundColor = '#E0D090';
+          cardClone.style.boxShadow = '0 3px 8px rgba(128, 0, 32, 0.4)';
         }
         
         orderedCards.push(cardClone);
