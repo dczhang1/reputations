@@ -374,13 +374,7 @@ p, li {
 }
 
 .round-indicator-results {
-    display: inline-block;
-    padding: 5px 15px;
-    background-color: var(--primary-color);
-    color: white;
-    border-radius: 20px;
-    font-weight: 600;
-    margin: var(--space-sm) auto;
+    display: none; /* Hide this completely - redundant info */
 }
 
 /* ===== RANKING SCALE ===== */
@@ -394,13 +388,23 @@ p, li {
 
 /* ===== SCORE FEEDBACK ===== */
 .score-feedback {
-    background: #f0f8ff;
-    border: 1px solid #b0d8ff;
-    border-radius: var(--border-radius-md);
-    padding: var(--space-md);
+    background: transparent; /* Changed from blue background to transparent */
+    border: none; /* Removed border */
+    padding: 0; /* Removed padding */
     margin: var(--space-md) 0;
     text-align: center;
     display: none;
+}
+
+#points-earned {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    margin: var(--space-md) 0;
+}
+
+#match-details {
+    display: none; /* Always hide this */
 }
 
 /* ===== HAMBURGER MENU ===== */
