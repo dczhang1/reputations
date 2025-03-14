@@ -1,37 +1,34 @@
 /* 
  * Reputations Game - Main Stylesheet
- * Updated with Dark Academia theme
  * Contains all styling for the game, organized by component.
  */
 
 /* ===== BASE STYLES ===== */
 :root {
-  /* Color variables - Dark Academia themed */
-  --primary-color: #D4A017; /* Antique gold */
-  --primary-hover: #C09016; /* Slightly darker gold */
-  --primary-active: #B08015; /* Even darker gold */
-  --secondary-color: #800020; /* Burgundy */
-  --secondary-hover: #700018; /* Darker burgundy */
-  --text-color: #E8D8A2; /* Aged parchment */
-  --text-light: #BDB592; /* Lighter parchment */
-  --heading-color: #D4A017; /* Antique gold */
-  --bg-color: #1A2526; /* Rich midnight blue */
-  --card-bg: #E8D8A2; /* Aged parchment */
-  --card-border: #4A3C31; /* Blackened bronze */
-  --success-color: #2E4A2D; /* Forest green */
-  --warning-color: #9B591F; /* Amber */
-  --error-color: #800020; /* Burgundy */
-  --container-bg: #2F2F2F; /* Deep charcoal gray */
+  /* Color variables */
+  --primary-color: #7b68ee;
+  --primary-hover: #6a5acd;
+  --primary-active: #5a4db7;
+  --secondary-color: #ff8787;
+  --secondary-hover: #ff6b6b;
+  --text-color: #2a2a2a;
+  --text-light: #666;
+  --heading-color: var(--primary-color);
+  --bg-color: #f5f6fa;
+  --card-bg: white;
+  --success-color: #4caf50;
+  --warning-color: #ff9800;
+  --error-color: #e57373;
   
   /* Spacing variables */
   --space-xs: 5px;
-  --space-sm: 8px; /* Slightly tighter spacing */
-  --space-md: 12px;
-  --space-lg: 18px;
-  --space-xl: 25px;
+  --space-sm: 10px;
+  --space-md: 15px;
+  --space-lg: 20px;
+  --space-xl: 30px;
   
   /* Typography */
-  --font-family: 'EB Garamond', 'Crimson Text', Georgia, serif;
+  --font-family: 'Poppins', sans-serif;
   --font-size-base: 1rem;
   --font-size-sm: 0.875rem;
   --font-size-lg: 1.1rem;
@@ -40,9 +37,9 @@
   --font-size-xxxl: 2.5rem;
   
   /* Border radius */
-  --border-radius-sm: 2px; /* More subtle, less rounded corners */
-  --border-radius-md: 4px;
-  --border-radius-lg: 6px;
+  --border-radius-sm: 4px;
+  --border-radius-md: 8px;
+  --border-radius-lg: 10px;
   --border-radius-round: 50%;
 }
 
@@ -57,8 +54,6 @@ body {
     background: var(--bg-color);
     color: var(--text-color);
     line-height: 1.6;
-    background-image: url('https://www.transparenttextures.com/patterns/black-paper.png');
-    letter-spacing: 0.5px;
 }
 
 .container { 
@@ -70,7 +65,6 @@ body {
 button { 
     cursor: pointer;
     font-family: var(--font-family);
-    letter-spacing: 0.8px;
 }
 
 /* ===== TYPOGRAPHY ===== */
@@ -78,19 +72,15 @@ h1, h2, h3, h4 {
     color: var(--heading-color);
     margin-bottom: var(--space-md);
     font-weight: 600;
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
 }
 
 h1 {
     font-size: var(--font-size-xxxl);
     text-align: center;
-    letter-spacing: 1.5px;
-    font-style: italic;
 }
 
 h2 {
     font-size: var(--font-size-xxl);
-    letter-spacing: 1px;
 }
 
 h3 {
@@ -110,12 +100,10 @@ p, li {
 .game-section { 
     display: none; 
     padding: var(--space-lg); 
-    background: var(--container-bg); 
+    background: var(--card-bg); 
     border-radius: var(--border-radius-lg); 
     margin: var(--space-lg) 0; 
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
-    border: 1px solid var(--card-border);
-    background-image: url('https://www.transparenttextures.com/patterns/dark-leather.png');
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 #start-menu { 
@@ -129,7 +117,6 @@ p, li {
     color: var(--text-light);
     margin-bottom: var(--space-xl);
     font-size: var(--font-size-lg);
-    font-style: italic;
 }
 
 .start-menu-buttons {
@@ -162,54 +149,27 @@ p, li {
 
 /* ===== BUTTONS ===== */
 .btn {
-    background: var(--container-bg);
-    color: var(--primary-color);
-    border: 1px solid var(--primary-color);
+    background: var(--primary-color);
+    color: white;
+    border: none;
     padding: var(--space-sm) var(--space-lg);
     border-radius: var(--border-radius-sm);
     margin: var(--space-sm);
     font-weight: 600;
-    transition: all 0.3s;
-    position: relative;
-    overflow: hidden;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-}
-
-.btn:before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(
-        to right,
-        transparent 0%,
-        rgba(212, 160, 23, 0.2) 50%,
-        transparent 100%
-    );
-    transition: left 0.7s;
+    transition: background 0.3s, transform 0.2s;
 }
 
 .btn:hover {
-    background: #3A3A3A;
+    background: var(--primary-hover);
     transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
-}
-
-.btn:hover:before {
-    left: 100%;
 }
 
 .btn:active {
     transform: translateY(0);
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
 
 .btn:disabled {
-    background: #3A3A3A;
-    border-color: #5A5A5A;
-    color: #8A8A8A;
+    background: #d1d1d1;
     cursor: not-allowed;
     transform: none;
 }
@@ -220,13 +180,11 @@ p, li {
 }
 
 .btn-secondary {
-    background: var(--container-bg);
-    color: var(--secondary-color);
-    border-color: var(--secondary-color);
+    background: var(--secondary-color);
 }
 
 .btn-secondary:hover {
-    background: #3A3A3A;
+    background: var(--secondary-hover);
 }
 
 /* ===== TRAIT CARDS ===== */
@@ -234,7 +192,7 @@ p, li {
     width: 150px;
     height: 220px;
     background: var(--card-bg);
-    border: 1px solid var(--card-border);
+    border: 1px solid #ddd;
     border-radius: var(--border-radius-md);
     padding: var(--space-sm);
     margin: var(--space-sm);
@@ -242,50 +200,22 @@ p, li {
     position: relative;
     cursor: pointer;
     vertical-align: top;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
-    transition: transform 0.3s, box-shadow 0.3s;
-    color: #2F2F2F;
-    background-image: url('https://www.transparenttextures.com/patterns/old-paper.png');
-}
-
-.trait-card:before {
-    content: '';
-    position: absolute;
-    top: 5px;
-    left: 5px;
-    right: 5px;
-    bottom: 5px;
-    border: 1px solid rgba(74, 60, 49, 0.3);
-    pointer-events: none;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .trait-card:hover {
-    transform: translateY(-3px) rotate(1deg);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
 .trait-card h3 {
     margin-top: 0;
     font-size: var(--font-size-lg);
-    color: #3C2F2F;
-    text-align: center;
-    font-style: italic;
-    text-shadow: none;
-    position: relative;
-}
-
-.trait-card h3:after {
-    content: '';
-    display: block;
-    width: 70%;
-    height: 1px;
-    background: rgba(60, 47, 47, 0.3);
-    margin: 5px auto;
 }
 
 .trait-card p {
     font-size: var(--font-size-sm);
-    color: #3C2F2F;
 }
 
 .card-rank {
@@ -295,14 +225,13 @@ p, li {
     width: 30px;
     height: 30px;
     background: var(--primary-color);
-    color: #2F2F2F;
+    color: white;
     border-radius: var(--border-radius-round);
     display: flex;
     align-items: center;
     justify-content: center;
     font-weight: bold;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-    border: 1px solid #3C2F2F;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 .cards-container {
@@ -310,11 +239,6 @@ p, li {
     justify-content: center;
     flex-wrap: wrap;
     margin: var(--space-lg) 0;
-    min-height: 250px;
-    background: rgba(47, 47, 47, 0.5);
-    padding: var(--space-md);
-    border-radius: var(--border-radius-md);
-    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
 /* ===== PLAYER SETUP ===== */
@@ -328,16 +252,14 @@ p, li {
 .player-input input {
     flex: 1;
     padding: var(--space-sm);
-    border: 1px solid var(--card-border);
+    border: 1px solid #ddd;
     border-radius: var(--border-radius-sm);
     font-family: var(--font-family);
-    background: rgba(232, 216, 162, 0.9);
-    color: #3C2F2F;
 }
 
 .remove-player-btn {
     background: var(--secondary-color);
-    color: var(--text-color);
+    color: white;
     border: none;
     border-radius: var(--border-radius-round);
     width: 28px;
@@ -369,15 +291,13 @@ p, li {
 .round-indicator {
     text-align: center;
     margin: var(--space-md) 0;
-    padding: 5px 15px;
-    background-color: #3C2F2F;
+    padding: 5px 10px;
+    background-color: #f0f0f0;
     border-radius: 20px;
     display: inline-block;
     position: relative;
     left: 50%;
     transform: translateX(-50%);
-    border: 1px solid var(--primary-color);
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
 }
 
 .round-text {
@@ -389,13 +309,11 @@ p, li {
 .round-indicator-results {
     display: inline-block;
     padding: 5px 15px;
-    background-color: #3C2F2F;
-    color: var(--primary-color);
+    background-color: var(--primary-color);
+    color: white;
     border-radius: 20px;
-    border: 1px solid var(--primary-color);
     font-weight: 600;
     margin: var(--space-sm) auto;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
 }
 
 /* ===== RANKING SCALE ===== */
@@ -405,22 +323,17 @@ p, li {
     margin: var(--space-sm) 0;
     font-weight: 500;
     color: var(--primary-color);
-    font-style: italic;
-    padding: 5px 10px;
-    background: rgba(60, 47, 47, 0.3);
-    border-radius: var(--border-radius-sm);
 }
 
 /* ===== SCORE FEEDBACK ===== */
 .score-feedback {
-    background: rgba(60, 47, 47, 0.6);
-    border: 1px solid var(--primary-color);
+    background: #f0f8ff;
+    border: 1px solid #b0d8ff;
     border-radius: var(--border-radius-md);
     padding: var(--space-md);
     margin: var(--space-md) 0;
     text-align: center;
     display: none;
-    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
 }
 
 /* ===== HAMBURGER MENU ===== */
@@ -430,28 +343,27 @@ p, li {
     right: var(--space-lg);
     width: 40px;
     height: 40px;
-    background: #3C2F2F;
-    border-radius: var(--border-radius-sm);
+    background: var(--primary-color);
+    border-radius: var(--border-radius-round);
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     cursor: pointer;
     z-index: 100;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
     transition: background-color 0.3s, transform 0.2s;
-    border: 1px solid var(--primary-color);
 }
 
 .hamburger-btn:hover {
-    background: #4D3F3F;
+    background: var(--primary-hover);
     transform: scale(1.05);
 }
 
 .hamburger-line {
     width: 20px;
     height: 2px;
-    background: var(--primary-color);
+    background: white;
     margin: 2px 0;
     transition: transform 0.3s, opacity 0.3s;
 }
@@ -475,15 +387,13 @@ p, li {
     top: 70px;
     right: var(--space-lg);
     width: 250px;
-    background: #2F2F2F;
-    border-radius: var(--border-radius-md);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+    background: var(--card-bg);
+    border-radius: var(--border-radius-lg);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
     z-index: 90;
     transform: translateX(300px);
     transition: transform 0.3s ease-in-out;
     overflow: hidden;
-    border: 1px solid var(--primary-color);
-    background-image: url('https://www.transparenttextures.com/patterns/dark-leather.png');
 }
 
 .floating-menu.show {
@@ -492,17 +402,16 @@ p, li {
 
 .menu-header {
     padding: var(--space-md);
-    background: #3C2F2F;
+    background: var(--bg-color);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 1px solid var(--primary-color);
+    border-bottom: 1px solid #eee;
 }
 
 .menu-header h3 {
     margin: 0;
     color: var(--primary-color);
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
 }
 
 .menu-options {
@@ -521,26 +430,11 @@ p, li {
     font-family: var(--font-family);
     font-size: 16px;
     color: var(--text-color);
-    transition: background 0.2s, color 0.2s;
-    position: relative;
-}
-
-.menu-btn:before {
-    content: '•';
-    position: absolute;
-    left: 8px;
-    color: var(--primary-color);
-    opacity: 0;
-    transition: opacity 0.2s;
+    transition: background 0.2s;
 }
 
 .menu-btn:hover {
-    background: #3C2F2F;
-    padding-left: 25px;
-}
-
-.menu-btn:hover:before {
-    opacity: 1;
+    background: #f0f0f0;
 }
 
 .close-btn {
@@ -554,7 +448,6 @@ p, li {
 
 .close-btn:hover {
     color: var(--primary-hover);
-    text-shadow: 0 0 5px rgba(212, 160, 23, 0.3);
 }
 
 /* ===== MODAL STYLES ===== */
@@ -565,15 +458,13 @@ p, li {
     transform: translate(-50%, -50%) scale(0.9);
     width: 90%;
     max-width: 600px;
-    background: #2F2F2F;
-    border-radius: var(--border-radius-md);
+    background: var(--card-bg);
+    border-radius: var(--border-radius-lg);
     z-index: 200;
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.3s, transform 0.3s, visibility 0.3s;
-    box-shadow: 0 5px 30px rgba(0, 0, 0, 0.5);
-    border: 1px solid var(--primary-color);
-    background-image: url('https://www.transparenttextures.com/patterns/dark-leather.png');
+    box-shadow: 0 5px 30px rgba(0, 0, 0, 0.3);
 }
 
 .modal.show {
@@ -584,11 +475,10 @@ p, li {
 
 .modal-header {
     padding: var(--space-md) var(--space-lg);
-    border-bottom: 1px solid var(--primary-color);
+    border-bottom: 1px solid #eee;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: #3C2F2F;
 }
 
 .modal-body {
@@ -599,9 +489,8 @@ p, li {
 
 .modal-footer {
     padding: var(--space-md) var(--space-lg);
-    border-top: 1px solid var(--primary-color);
+    border-top: 1px solid #eee;
     text-align: right;
-    background: #3C2F2F;
 }
 
 /* Dark Error Modal Specific Styling */
@@ -609,8 +498,7 @@ p, li {
     max-width: 450px;
     background: #222;
     border-radius: var(--border-radius-md);
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.6);
-    border: 1px solid var(--error-color);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
 }
 
 .dark-modal .modal-content {
@@ -620,7 +508,7 @@ p, li {
 
 .dark-modal .modal-header {
     padding: var(--space-md) var(--space-lg);
-    border-bottom: 1px solid var(--error-color);
+    border-bottom: 1px solid #333;
     background: #222;
 }
 
@@ -640,7 +528,7 @@ p, li {
 .dark-modal .modal-footer {
     padding: var(--space-sm) var(--space-lg);
     background: #222;
-    border-top: 1px solid var(--error-color);
+    border-top: 1px solid #333;
     text-align: right;
 }
 
@@ -651,9 +539,9 @@ p, li {
 }
 
 .btn-ok {
-    background: var(--secondary-color);
+    background: #4747eb;
     color: white;
-    border: 1px solid var(--secondary-hover);
+    border: none;
     padding: var(--space-sm) var(--space-lg);
     border-radius: var(--border-radius-sm);
     font-family: var(--font-family);
@@ -664,7 +552,7 @@ p, li {
 }
 
 .btn-ok:hover {
-    background: var(--secondary-hover);
+    background: #3939cd;
 }
 
 .overlay {
@@ -673,7 +561,7 @@ p, li {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.7);
+    background: rgba(0, 0, 0, 0.5);
     z-index: 150;
     opacity: 0;
     visibility: hidden;
@@ -694,24 +582,21 @@ p, li {
     display: block;
     margin-bottom: 5px;
     font-weight: 500;
-    color: var(--text-color);
 }
 
 .option-group select {
     width: 100%;
     padding: 8px;
-    border: 1px solid var(--card-border);
+    border: 1px solid #ddd;
     border-radius: var(--border-radius-sm);
-    background: rgba(232, 216, 162, 0.9);
+    background: white;
     font-family: var(--font-family);
-    color: #3C2F2F;
 }
 
 /* ===== TYPOGRAPHY FOR MODALS ===== */
 .modal h4 {
     color: var(--primary-color);
     margin: var(--space-md) 0 var(--space-sm);
-    font-style: italic;
 }
 
 .modal p, .modal li {
@@ -721,24 +606,6 @@ p, li {
 
 .modal ol, .modal ul {
     padding-left: var(--space-lg);
-}
-
-/* ===== SCORE DISPLAY ===== */
-#scores {
-    display: inline-block;
-    padding: 5px 15px;
-    background-color: #3C2F2F;
-    border-radius: var(--border-radius-md);
-    margin: var(--space-sm) 0;
-    border: 1px solid var(--primary-color);
-    color: var(--text-color);
-    font-weight: 500;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-}
-
-#team-score, #game-score {
-    color: var(--primary-color);
-    font-weight: 600;
 }
 
 /* ===== ANIMATIONS ===== */
@@ -758,26 +625,16 @@ p, li {
     75% { transform: translateX(5px); }
 }
 
-@keyframes goldenGlow {
-    0%, 100% { box-shadow: 0 0 5px rgba(212, 160, 23, 0.3); }
-    50% { box-shadow: 0 0 15px rgba(212, 160, 23, 0.5); }
-}
-
 .shake {
     animation: shake 0.3s;
 }
 
 .trait-card {
-    animation: fadeIn 0.5s;
+    animation: fadeIn 0.3s;
 }
 
 #game-status {
     animation: slideIn 0.5s;
-}
-
-.btn:focus {
-    animation: goldenGlow 1.5s infinite;
-    outline: none;
 }
 
 /* ===== MEDIA QUERIES ===== */
