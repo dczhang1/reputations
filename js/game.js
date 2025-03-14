@@ -694,60 +694,61 @@ const UIController = {
   
   /**
    * Highlights matching and mismatching cards and reorders them based on subject's ranking
-   */
-  highlightMatches() {
-    const cardsContainer = GameController.elements.gameBoard.cardsContainer;
-    const cards = Array.from(document.querySelectorAll('.trait-card'));
-    
-    // Clear the container first
-    cardsContainer.innerHTML = '';
-    
-    // Create array to hold ordered cards
-    const orderedCards = [];
-    
-    // For each position in the subject's ranking
-    for (let i = 0; i < GameState.subjectRanking.length; i++) {
-      const cardId = GameState.subjectRanking[i];
-      // Find the corresponding card element
-      const card = cards.find(card => parseInt(card.dataset.id) === cardId);
+       */
+      highlightMatches() {
+      const cardsContainer = GameController.elements.gameBoard.cardsContainer;
+      const cards = Array.from(document.querySelectorAll('.trait-card'));
       
-      if (card) {
-        // Clone the card to avoid reference issues
-        const cardClone = card.cloneNode(true);
+      // Clear the container first
+      cardsContainer.innerHTML = '';
+      
+      // Create array to hold ordered cards
+      const orderedCards = [];
+      
+      // For each position in the subject's ranking
+      for (let i = 0; i < GameState.subjectRanking.length; i++) {
+        const cardId = GameState.subjectRanking[i];
+        // Find the corresponding card element
+        const card = cards.find(card => parseInt(card.dataset.id) === cardId);
         
-        // Remove any existing rank badges
-        const existingRank = cardClone.querySelector('.card-rank');
-        if (existingRank) {
-          existingRank.remove();
+        if (card) {
+          // Clone the card to avoid reference issues
+          const cardClone = card.cloneNode(true);
+          
+          // Remove any existing rank badges
+          const existingRank = cardClone.querySelector('.card-rank');
+          if (existingRank) {
+            existingRank.remove();
+          }
+          
+          // Get the informant's ranking position for this card
+          const informantPosition = GameState.informantRanking.indexOf(cardId);
+          
+          // Add class based on match accuracy
+          if (i === informantPosition) {
+            // Exact match
+            cardClone.classList.add('exact-match');
+            cardClone.style.border = '2px solid var(--success-color)';
+          } else if (Math.abs(i - informantPosition) === 1) {
+            // Close match
+            cardClone.classList.add('close-match');
+            cardClone.style.border = '2px solid var(--warning-color)';
+          } else {
+            // No match
+            cardClone.classList.add('no-match');
+            cardClone.style.border = '2px solid var(--error-color)';
+          }
+          
+          orderedCards.push(cardClone);
         }
-        
-        // Get the informant's ranking position for this card
-        const informantPosition = GameState.informantRanking.indexOf(cardId);
-        
-        // Style based on match accuracy
-        if (i === informantPosition) {
-          // Exact match
-          cardClone.style.border = '2px solid green';
-          cardClone.style.backgroundColor = '#e8f5e9';
-        } else if (Math.abs(i - informantPosition) === 1) {
-          // Close match
-          cardClone.style.border = '2px solid orange';
-          cardClone.style.backgroundColor = '#fff8e1';
-        } else {
-          // No match
-          cardClone.style.border = '2px solid red';
-          cardClone.style.backgroundColor = '#ffebee';
-        }
-        
-        orderedCards.push(cardClone);
       }
+      
+      // Add all cards to the container in the correct order
+      orderedCards.forEach(card => {
+        cardsContainer.appendChild(card);
+      });
     }
-    
-    // Add all cards to the container in the correct order
-    orderedCards.forEach(card => {
-      cardsContainer.appendChild(card);
-    });
-  }
+
 };
 
 // Initialize the game when DOM is loaded

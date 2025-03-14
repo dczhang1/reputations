@@ -300,6 +300,7 @@ p, li {
     background-image: url('https://source.unsplash.com/featured/?parchment');
     background-size: cover;
     color: var(--dark-gray);
+    overflow: hidden;
 }
 
 .trait-card::before {
@@ -318,6 +319,39 @@ p, li {
 .trait-card:hover {
     transform: translateY(-5px) rotate(1deg);
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Match result spotlight effect */
+.trait-card.exact-match::after,
+.trait-card.close-match::after,
+.trait-card.no-match::after {
+    content: '';
+    position: absolute;
+    bottom: -80px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 140px;
+    height: 140px;
+    border-radius: 70px;
+    filter: blur(20px);
+    opacity: 0.4;
+    z-index: -1;
+    transition: all 0.5s ease;
+}
+
+.trait-card.exact-match::after {
+    background: var(--success-color);
+    box-shadow: 0 0 20px 5px rgba(107, 128, 104, 0.6);
+}
+
+.trait-card.close-match::after {
+    background: var(--warning-color);
+    box-shadow: 0 0 20px 5px rgba(200, 157, 124, 0.6);
+}
+
+.trait-card.no-match::after {
+    background: var(--error-color);
+    box-shadow: 0 0 20px 5px rgba(128, 56, 56, 0.6);
 }
 
 .trait-card h3 {
