@@ -295,20 +295,15 @@ const GameController = {
     
     // Calculate points
     let matchPoints = 0;
-    const matchDetails = [];
     
     for (let i = 0; i < 5; i++) {
       if (GameState.subjectRanking[i] === GameState.informantRanking[i]) {
         matchPoints += GameConfig.SCORING.EXACT_MATCH; // Exact match
-        matchDetails.push(`Exact match at position ${i+1}: +${GameConfig.SCORING.EXACT_MATCH} points`);
       } else {
         // Check for adjacent ranking
         const subjectIndex = GameState.subjectRanking.indexOf(GameState.informantRanking[i]);
         if (Math.abs(subjectIndex - i) === 1) {
           matchPoints += GameConfig.SCORING.CLOSE_MATCH; // Off by one position
-          matchDetails.push(`Close match at position ${i+1}: +${GameConfig.SCORING.CLOSE_MATCH} points`);
-        } else {
-          matchDetails.push(`No match at position ${i+1}: +0 points`);
         }
       }
     }
@@ -325,11 +320,8 @@ const GameController = {
     // Update score display with new score changes
     UIController.updateScoreDisplay();
     
-    // Show score feedback
+    // Show a simplified score feedback
     this.elements.gameBoard.pointsEarned.textContent = `Points earned: ${matchPoints}`;
-    this.elements.gameBoard.matchDetails.innerHTML = matchDetails.join('<br>');
-    this.elements.rounds.currentResults.textContent = GameState.currentRound;
-    this.elements.rounds.totalResults.textContent = GameState.totalRounds;
     this.elements.gameBoard.scoreFeedback.style.display = 'block';
     
     // Make ranking scale visible again
@@ -344,7 +336,7 @@ const GameController = {
     
     console.log(`Round completed. Points earned: ${matchPoints}`);
   },
-  
+    
   /**
    * End the game and show final results
    */
