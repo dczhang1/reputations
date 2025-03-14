@@ -692,10 +692,10 @@ const UIController = {
     console.log("Cards reset for informants");
   },
   
-  /**
-   * Highlights matching and mismatching cards and reorders them based on subject's ranking
-       */
-      highlightMatches() {
+    /**
+     * Highlights matching and mismatching cards and reorders them based on subject's ranking
+     */
+    highlightMatches() {
       const cardsContainer = GameController.elements.gameBoard.cardsContainer;
       const cards = Array.from(document.querySelectorAll('.trait-card'));
       
