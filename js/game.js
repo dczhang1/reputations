@@ -1,6 +1,8 @@
 /**
  * Reputations Game - Game Logic Module
  * Contains all game functionality and event handling.
+  * Copyright © 2025 Don C. Zhang. All rights reserved.
+
  */
 
 // Main Game Controller

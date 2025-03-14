@@ -1,6 +1,7 @@
 /* 
  * Reputations Game - Main Stylesheet
  * Contains all styling for the game, organized by component.
+* Copyright © 2025 Don C. Zhang. All rights reserved.
  */
 
 /* ===== BASE STYLES ===== */
@@ -778,4 +779,24 @@ p, li {
         top: var(--space-sm);
         right: var(--space-sm);
     }
+}
+
+
+.copyright-footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  padding: 5px 0;
+  font-size: 0.75rem;
+  opacity: 0.4;
+  z-index: 10;
+  pointer-events: none;
+  color: var(--text-color, #2a2a2a);
+  transition: opacity 0.3s ease;
+}
+
+.copyright-footer:hover {
+  opacity: 0.8;
 }

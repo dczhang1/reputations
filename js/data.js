@@ -1,6 +1,8 @@
 /**
  * Reputations Game - Data Module
  * Contains game data and state management functions.
+  * Copyright © 2025 Don C. Zhang. All rights reserved.
+
  */
 
 // Game configuration and default values
