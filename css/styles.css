@@ -800,3 +800,53 @@ p, li {
 .copyright-footer:hover {
   opacity: 0.8;
 }
+
+
+/* Responsive card text scaling for Mobile*/
+.trait-card {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; /* Prevent text from spilling out */
+  }
+  
+  .trait-card h3 {
+    font-size: clamp(0.9rem, 3vw, 1.1rem); /* Responsive font size */
+    margin-bottom: 5px;
+    line-height: 1.2;
+    word-wrap: break-word;
+    hyphens: auto;
+  }
+  
+  .trait-card p {
+    font-size: clamp(0.7rem, 2.5vw, 0.875rem); /* Responsive font size */
+    line-height: 1.3;
+    word-wrap: break-word;
+    hyphens: auto;
+    flex-grow: 1;
+    overflow-y: auto; /* Allow scrolling if absolutely needed */
+  }
+  
+  /* Improve mobile responsiveness */
+  @media (max-width: 480px) {
+    .trait-card {
+      width: calc(50% - 10px); /* Make cards take up half width minus margin */
+      min-height: 160px; /* Use min-height instead of fixed height */
+      height: auto; /* Allow height to grow if needed */
+      margin: 5px;
+      padding: 8px;
+    }
+    
+    .cards-container {
+      justify-content: space-between; /* Distribute cards evenly */
+      padding: 0 5px;
+    }
+  }
+  
+  /* Extra small screens */
+  @media (max-width: 360px) {
+    .trait-card {
+      width: calc(100% - 10px); /* Full width on very small screens */
+      max-width: 200px;
+      margin: 5px auto;
+    }
+  }
