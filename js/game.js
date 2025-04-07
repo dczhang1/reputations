@@ -805,7 +805,7 @@ const UIController = {
         // Get the informant's ranking position for this card
         const informantPosition = GameState.informantRanking.indexOf(cardId);
         
-        // Create informant rank badge (centered on card)
+        // Create informant rank badge (bottom right)
         const informantRankBadge = document.createElement('div');
         informantRankBadge.className = 'card-rank informant-rank';
         informantRankBadge.textContent = informantPosition + 1;
@@ -814,16 +814,13 @@ const UIController = {
         // Style based on match accuracy
         if (i === informantPosition) {
           // Exact match
-          cardClone.style.border = '2px solid green';
-          cardClone.style.backgroundColor = '#e8f5e9';
+          cardClone.classList.add('exact-match');
         } else if (Math.abs(i - informantPosition) === 1) {
           // Close match
-          cardClone.style.border = '2px solid orange';
-          cardClone.style.backgroundColor = '#fff8e1';
+          cardClone.classList.add('close-match');
         } else {
           // No match
-          cardClone.style.border = '2px solid red';
-          cardClone.style.backgroundColor = '#ffebee';
+          cardClone.classList.add('no-match');
         }
         
         orderedCards.push(cardClone);
