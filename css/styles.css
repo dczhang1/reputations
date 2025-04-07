@@ -6,24 +6,65 @@
 
 /* ===== BASE STYLES ===== */
 :root {
-  /* Color variables - Updated for a more vibrant, playful palette */
-  --primary-color: #6c5ce7; /* Vibrant purple */
-  --primary-hover: #5b4bc4;
-  --primary-active: #4a3ab3;
-  --secondary-color: #ff7675; /* Coral red */
-  --secondary-hover: #ff6b6b;
-  --accent-color: #00b894; /* Mint green */
-  --accent-hover: #00a884;
-  --text-color: #2d3436; /* Dark gray */
-  --text-light: #636e72; /* Medium gray */
+  /* Primary Colors - Psychology-Inspired Palette */
+  --primary-color: #008080; /* Introspection Teal */
+  --primary-hover: #006666;
+  --primary-active: #005353;
+  
+  --secondary-color: #FFBF00; /* Social Amber */
+  --secondary-hover: #E6AC00;
+  
+  --accent-color: #673147; /* Depth Plum */
+  --accent-hover: #542639;
+  
+  /* Functional Colors */
+  --subject-color: #082567; /* Insight Blue */
+  --informant-color: #8A9A5B; /* Perception Green */
+  --success-color: #2E8B57; /* Accuracy Green */
+  --warning-color: #D4A017; /* Reflection Amber */
+  
+  /* Background & Structural Colors */
+  --bg-color: #F5F5F5; /* Neutral Light */
+  --card-bg: #E0E0E0; /* Neutral Mid */
+  --text-color: #2F4F4F; /* Neutral Dark */
+  --text-light: #4F6F6F; /* Lighter variant of Neutral Dark */
   --heading-color: var(--primary-color);
-  --bg-color: #f9f9ff; /* Light blue-white */
-  --card-bg: white;
-  --success-color: #00b894; /* Mint green */
-  --warning-color: #fdcb6e; /* Yellow */
-  --error-color: #ff7675; /* Coral red */
-  --card-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-  --button-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  
+  /* Typography System */
+  --font-primary: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+  --font-secondary: 'Source Serif Pro', Georgia, serif;
+  
+  /* Type Scale - Updated for Game UI */
+  --font-size-display: 3rem; /* Was 2.5rem */
+  --line-height-display: 3.6rem; /* Was 3rem */
+  --font-size-h1: 2.5rem; /* Was 2rem */
+  --line-height-h1: 3rem; /* Was 2.4rem */
+  --font-size-h2: 2rem; /* Was 1.5rem */
+  --line-height-h2: 2.4rem; /* Was 1.8rem */
+  --font-size-h3: 1.5rem; /* Was 1.25rem */
+  --line-height-h3: 1.8rem; /* Was 1.5rem */
+  --font-size-body-large: 1.25rem; /* Was 1.125rem */
+  --line-height-body-large: 1.7;
+  --font-size-body: 1.125rem; /* Was 1rem */
+  --line-height-body: 1.6;
+  --font-size-small: 1rem; /* Was 0.875rem */
+  --line-height-small: 1.4;
+  --font-size-xs: 0.875rem; /* Was 0.75rem */
+  --line-height-xs: 1.2;
+  
+  /* Font Weights */
+  --font-weight-bold: 700;
+  --font-weight-semibold: 600;
+  --font-weight-medium: 500;
+  --font-weight-regular: 400;
+  
+  /* Letter Spacing */
+  --letter-spacing-heading: -0.015em;
+  --letter-spacing-body: 0;
+  
+  /* Shadows and Effects */
+  --card-shadow: 0 8px 20px rgba(47, 79, 79, 0.1);
+  --button-shadow: 0 4px 8px rgba(47, 79, 79, 0.1);
   
   /* Spacing variables */
   --space-xs: 5px;
@@ -31,15 +72,6 @@
   --space-md: 15px;
   --space-lg: 20px;
   --space-xl: 30px;
-  
-  /* Typography */
-  --font-family: 'Poppins', sans-serif;
-  --font-size-base: 1rem;
-  --font-size-sm: 0.875rem;
-  --font-size-lg: 1.1rem;
-  --font-size-xl: 1.3rem;
-  --font-size-xxl: 1.8rem;
-  --font-size-xxxl: 2.5rem;
   
   /* Border radius */
   --border-radius-sm: 4px;
@@ -56,14 +88,19 @@
 }
 
 body { 
-    font-family: var(--font-family); 
+    font-family: var(--font-primary);
     background: var(--bg-color);
     color: var(--text-color);
-    line-height: 1.6;
+    line-height: var(--line-height-body);
+    font-size: var(--font-size-body);
+    letter-spacing: var(--letter-spacing-body);
+    font-weight: var(--font-weight-regular);
     background-image: 
-        radial-gradient(circle at 10% 20%, rgba(108, 92, 231, 0.05) 0%, transparent 20%),
-        radial-gradient(circle at 90% 80%, rgba(0, 184, 148, 0.05) 0%, transparent 20%);
+        radial-gradient(circle at 10% 20%, rgba(0, 128, 128, 0.05) 0%, transparent 20%),
+        radial-gradient(circle at 90% 80%, rgba(103, 49, 71, 0.05) 0%, transparent 20%);
     background-attachment: fixed;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 .container { 
@@ -83,47 +120,64 @@ button {
 h1, h2, h3, h4 { 
     color: var(--heading-color);
     margin-bottom: var(--space-md);
-    font-weight: 600;
+    letter-spacing: var(--letter-spacing-heading);
 }
 
 h1 {
-    font-size: var(--font-size-xxxl);
+    font-size: var(--font-size-h1);
+    line-height: var(--line-height-h1);
+    font-weight: var(--font-weight-semibold);
+}
+
+h2 {
+    font-size: var(--font-size-h2);
+    line-height: var(--line-height-h2);
+    font-weight: var(--font-weight-semibold);
+}
+
+h3 {
+    font-size: var(--font-size-h3);
+    line-height: var(--line-height-h3);
+    font-weight: var(--font-weight-medium);
+}
+
+.display-text {
+    font-size: var(--font-size-display);
+    line-height: var(--line-height-display);
+    font-weight: var(--font-weight-bold);
+    letter-spacing: var(--letter-spacing-heading);
+}
+
+.body-large {
+    font-size: var(--font-size-body-large);
+    line-height: var(--line-height-body-large);
+}
+
+.text-small {
+    font-size: var(--font-size-small);
+    line-height: var(--line-height-small);
+}
+
+.text-xs {
+    font-size: var(--font-size-xs);
+    line-height: var(--line-height-xs);
+}
+
+.text-secondary {
+    font-family: var(--font-secondary);
+}
+
+/* Game Title Styling */
+.game-title {
+    font-size: var(--font-size-display);
+    line-height: var(--line-height-display);
+    font-weight: var(--font-weight-bold);
     text-align: center;
     background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     margin-bottom: var(--space-lg);
-    text-shadow: 0 2px 10px rgba(108, 92, 231, 0.2);
-}
-
-h2 {
-    font-size: var(--font-size-xxl);
-    position: relative;
-    display: inline-block;
-}
-
-h2::after {
-    content: '';
-    position: absolute;
-    bottom: -5px;
-    left: 0;
-    width: 50px;
-    height: 3px;
-    background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
-    border-radius: 3px;
-}
-
-h3 {
-    font-size: var(--font-size-xl);
-}
-
-h4 {
-    font-size: var(--font-size-lg);
-    margin-top: var(--space-md);
-}
-
-p, li {
-    margin-bottom: var(--space-sm);
+    letter-spacing: var(--letter-spacing-heading);
 }
 
 /* ===== GAME SECTIONS ===== */
@@ -197,7 +251,7 @@ p, li {
     background: linear-gradient(135deg, var(--primary-color), var(--primary-hover));
     color: white;
     border: none;
-    padding: var(--space-sm) var(--space-lg);
+    padding: var(--space-md) var(--space-xl);
     border-radius: var(--border-radius-md);
     margin: var(--space-sm);
     font-weight: 600;
@@ -206,6 +260,7 @@ p, li {
     position: relative;
     overflow: hidden;
     z-index: 1;
+    min-height: 48px;
 }
 
 .btn::before {
@@ -215,7 +270,7 @@ p, li {
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(135deg, var(--primary-hover), var(--primary-color));
+    background: linear-gradient(135deg, var(--primary-hover), var(--primary-active));
     z-index: -1;
     transition: opacity 0.3s ease;
     opacity: 0;
@@ -243,9 +298,10 @@ p, li {
 }
 
 .btn-large {
-    padding: var(--space-md) var(--space-xl);
-    font-size: var(--font-size-lg);
+    padding: var(--space-lg) var(--space-xl);
+    font-size: var(--font-size-h3);
     border-radius: var(--border-radius-lg);
+    min-height: 56px;
 }
 
 .btn-secondary {
@@ -258,12 +314,12 @@ p, li {
 
 /* ===== TRAIT CARDS ===== */
 .trait-card {
-    width: 150px;
-    height: 220px;
+    width: 180px;
+    height: 260px;
     background: var(--card-bg);
     border: none;
     border-radius: var(--border-radius-lg);
-    padding: var(--space-sm);
+    padding: var(--space-md);
     margin: var(--space-sm);
     display: inline-block;
     position: relative;
@@ -290,22 +346,28 @@ p, li {
 }
 
 .trait-card h3 {
-    margin-top: 0;
-    font-size: var(--font-size-lg);
+    font-size: clamp(1.25rem, 3vw, 1.5rem);
+    line-height: 1.3;
+    margin-bottom: var(--space-sm);
     color: var(--primary-color);
+    font-weight: var(--font-weight-medium);
 }
 
 .trait-card p {
-    font-size: var(--font-size-sm);
+    font-size: clamp(1rem, 2.5vw, 1.125rem);
+    line-height: 1.4;
     color: var(--text-light);
+    font-weight: var(--font-weight-regular);
 }
 
 .card-rank {
     position: absolute;
     width: auto;
     height: auto;
-    font-weight: bold;
-    font-size: 1.5rem;
+    font-weight: var(--font-weight-bold);
+    font-size: var(--font-size-h3);
+    line-height: 1;
+    font-feature-settings: "tnum" on, "lnum" on;
     z-index: 2;
     background: none;
     border: none;
@@ -315,11 +377,11 @@ p, li {
     justify-content: center;
     bottom: 8px;
     right: 8px;
-    color: var(--primary-color);
+    color: var(--subject-color);
 }
 
 .card-rank.informant-rank {
-    color: var(--secondary-color);
+    color: var(--informant-color);
 }
 
 /* Hide the before pseudo-elements */
@@ -350,9 +412,11 @@ p, li {
     padding: var(--space-sm) var(--space-md);
     border: 2px solid #eee;
     border-radius: var(--border-radius-md);
-    font-family: var(--font-family);
+    font-family: var(--font-primary);
     transition: all 0.3s ease;
-    font-size: var(--font-size-base);
+    font-size: var(--font-size-body);
+    line-height: var(--line-height-body);
+    font-weight: var(--font-weight-regular);
 }
 
 .player-input input:focus {
@@ -403,18 +467,18 @@ p, li {
   justify-content: center;
   gap: 1.5rem;
   margin: 1rem auto;
-  padding: 0.5rem;
+  padding: var(--space-md);
   background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.7));
   border-radius: var(--border-radius-lg);
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.2);
-  max-width: 350px;
+  max-width: 400px;
 }
 
 .score-container {
   display: flex;
   align-items: center;
-  padding: 0.5rem 1rem;
+  padding: var(--space-md) var(--space-lg);
   border-radius: var(--border-radius-md);
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
   transition: all 0.3s ease;
@@ -426,40 +490,42 @@ p, li {
 }
 
 .team-score {
-  background: linear-gradient(135deg, rgba(108, 92, 231, 0.1), rgba(108, 92, 231, 0.05));
-  border: 1px solid rgba(108, 92, 231, 0.3);
+  background: linear-gradient(135deg, rgba(8, 37, 103, 0.1), rgba(8, 37, 103, 0.05));
+  border: 1px solid rgba(8, 37, 103, 0.3);
 }
 
 .game-score {
-  background: linear-gradient(135deg, rgba(255, 118, 117, 0.1), rgba(255, 118, 117, 0.05));
-  border: 1px solid rgba(255, 118, 117, 0.3);
+  background: linear-gradient(135deg, rgba(138, 154, 91, 0.1), rgba(138, 154, 91, 0.05));
+  border: 1px solid rgba(138, 154, 91, 0.3);
 }
 
 .score-label {
-  font-size: 0.9rem;
-  font-weight: 600;
-  margin-right: 0.5rem;
-  color: var(--text-color);
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-small);
+  font-weight: var(--font-weight-medium);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
 .score-value {
-  font-size: 1.2rem;
-  font-weight: 700;
+  font-size: var(--font-size-h3);
+  line-height: var(--line-height-h3);
+  font-weight: var(--font-weight-bold);
+  font-feature-settings: "tnum" on, "lnum" on;
 }
 
 .team-score .score-label, .team-score .score-value {
-  color: var(--primary-color);
+  color: var(--subject-color);
 }
 
 .game-score .score-label, .game-score .score-value {
-  color: var(--secondary-color);
+  color: var(--informant-color);
 }
 
 .score-change {
-  font-size: 0.8rem;
-  font-weight: 600;
-  margin-left: 0.25rem;
-  animation: fadeIn 0.5s ease-in-out;
+  font-size: var(--font-size-xs);
+  line-height: var(--line-height-xs);
+  font-weight: var(--font-weight-medium);
 }
 
 .team-score .score-change {
@@ -467,7 +533,7 @@ p, li {
 }
 
 .game-score .score-change {
-  color: var(--secondary-color);
+  color: var(--warning-color);
 }
 
 /* ===== ROUND INDICATOR ===== */
@@ -486,9 +552,10 @@ p, li {
 }
 
 .round-text {
-    font-size: 16px;
-    font-weight: 600;
-    color: var(--primary-color);
+    font-size: var(--font-size-body);
+    line-height: var(--line-height-body);
+    font-weight: var(--font-weight-medium);
+    letter-spacing: 0.02em;
 }
 
 .round-indicator-results {
@@ -534,8 +601,8 @@ p, li {
     position: fixed;
     top: var(--space-lg);
     right: var(--space-lg);
-    width: 50px;
-    height: 50px;
+    width: 60px;
+    height: 60px;
     background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
     border-radius: var(--border-radius-round);
     display: flex;
@@ -554,8 +621,8 @@ p, li {
 }
 
 .hamburger-line {
-    width: 24px;
-    height: 3px;
+    width: 30px;
+    height: 4px;
     background: white;
     margin: 3px 0;
     transition: transform 0.3s, opacity 0.3s;
@@ -581,7 +648,7 @@ p, li {
     top: 80px;
     right: var(--space-lg);
     width: 280px;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.85));
+    background: linear-gradient(135deg, rgba(245, 245, 245, 0.95), rgba(230, 242, 242, 0.85));
     border-radius: var(--border-radius-lg);
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
     z-index: 90;
@@ -630,7 +697,7 @@ p, li {
 }
 
 .menu-btn:hover {
-    background: rgba(108, 92, 231, 0.1);
+    background: rgba(0, 128, 128, 0.1);
     color: var(--primary-color);
     transform: translateX(5px);
 }
@@ -663,7 +730,7 @@ p, li {
     transform: translate(-50%, -50%) scale(0.9);
     width: 90%;
     max-width: 600px;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.85));
+    background: linear-gradient(135deg, rgba(245, 245, 245, 0.95), rgba(230, 242, 242, 0.85));
     border-radius: var(--border-radius-lg);
     z-index: 200;
     opacity: 0;
@@ -692,6 +759,9 @@ p, li {
 
 .modal-header h3 {
     margin: 0;
+    font-size: var(--font-size-h2);
+    line-height: var(--line-height-h2);
+    font-weight: var(--font-weight-semibold);
     color: white;
 }
 
@@ -699,6 +769,10 @@ p, li {
     padding: var(--space-lg);
     max-height: 70vh;
     overflow-y: auto;
+}
+
+.modal-body p {
+    margin-bottom: var(--space-md);
 }
 
 .modal-footer {
@@ -960,7 +1034,9 @@ p, li {
   width: 100%;
   text-align: center;
   padding: 5px 0;
-  font-size: 0.75rem;
+  font-size: var(--font-size-xs);
+  line-height: var(--line-height-xs);
+  font-weight: var(--font-weight-regular);
   opacity: 0.4;
   z-index: 10;
   pointer-events: none;
@@ -1021,3 +1097,92 @@ p, li {
       margin: 5px auto;
     }
   }
+
+/* Update card styling for match indicators */
+.trait-card {
+    background: var(--card-bg);
+}
+
+/* Update match indication colors */
+.trait-card.exact-match {
+    border: 2px solid var(--success-color);
+    background-color: rgba(46, 139, 87, 0.1);
+}
+
+.trait-card.close-match {
+    border: 2px solid var(--warning-color);
+    background-color: rgba(212, 160, 23, 0.1);
+}
+
+.trait-card.no-match {
+    border: 2px solid var(--accent-color);
+    background-color: rgba(103, 49, 71, 0.1);
+}
+
+/* Update ranking numbers */
+.card-rank {
+    color: var(--subject-color);
+}
+
+.card-rank.informant-rank {
+    color: var(--informant-color);
+}
+
+/* Update scoreboard colors */
+.team-score {
+    background: linear-gradient(135deg, rgba(8, 37, 103, 0.1), rgba(8, 37, 103, 0.05));
+    border: 1px solid rgba(8, 37, 103, 0.3);
+}
+
+.game-score {
+    background: linear-gradient(135deg, rgba(138, 154, 91, 0.1), rgba(138, 154, 91, 0.05));
+    border: 1px solid rgba(138, 154, 91, 0.3);
+}
+
+.team-score .score-label, .team-score .score-value {
+    color: var(--subject-color);
+}
+
+.game-score .score-label, .game-score .score-value {
+    color: var(--informant-color);
+}
+
+/* Update button gradients */
+.btn {
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-hover));
+}
+
+.btn::before {
+    background: linear-gradient(135deg, var(--primary-hover), var(--primary-active));
+}
+
+.btn-secondary {
+    background: linear-gradient(135deg, var(--secondary-color), var(--secondary-hover));
+}
+
+.btn-secondary::before {
+    background: linear-gradient(135deg, var(--secondary-hover), var(--secondary-color));
+}
+
+/* Update modal styling */
+.modal {
+    background: linear-gradient(135deg, rgba(245, 245, 245, 0.95), rgba(230, 242, 242, 0.85));
+}
+
+.modal-header {
+    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+}
+
+/* Update floating menu */
+.floating-menu {
+    background: linear-gradient(135deg, rgba(245, 245, 245, 0.95), rgba(230, 242, 242, 0.85));
+}
+
+.menu-header {
+    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+}
+
+.menu-btn:hover {
+    background: rgba(0, 128, 128, 0.1);
+    color: var(--primary-color);
+}
