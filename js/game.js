@@ -805,6 +805,12 @@ const UIController = {
         // Get the informant's ranking position for this card
         const informantPosition = GameState.informantRanking.indexOf(cardId);
         
+        // Create informant rank badge (centered on card)
+        const informantRankBadge = document.createElement('div');
+        informantRankBadge.className = 'card-rank informant-rank';
+        informantRankBadge.textContent = informantPosition + 1;
+        cardClone.appendChild(informantRankBadge);
+        
         // Style based on match accuracy
         if (i === informantPosition) {
           // Exact match
