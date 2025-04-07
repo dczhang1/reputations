@@ -324,7 +324,7 @@ const GameController = {
     
     // Show a simplified score feedback
     this.elements.gameBoard.pointsEarned.textContent = `Points earned: ${matchPoints}`;
-    this.elements.gameBoard.scoreFeedback.style.display = 'block';
+    this.elements.gameBoard.scoreFeedback.style.display = 'none';
     
     // Make ranking scale visible again
     this.elements.gameBoard.rankingScale.style.display = 'flex';
